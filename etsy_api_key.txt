@@ -1,0 +1,6 @@
+Etsy API KEY
+
+APP NAME15237 unit project
+KEYSTRING 22u5zgz7eze80ymvmqshkdti
+SHARED SECRETnvs5ykvwa7
+
