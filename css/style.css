@@ -39,31 +39,31 @@ body{
 
 
 #container{
-	width: 1180px;
+	width: 1190px;
 	padding: 30px 0px;
 }
 .navbar-inner{
 	font-family: ArvoRegular, Helvetica, Arial, sans-serif;
-	height: 75px;
-	background-color: #e98934;
-	background-image: none;
+	height: 73px;
+	background: #e98934 url('../img/rainbow.png') no-repeat right top;
 }
 .navbar-inner .brand{
 	color: #fff;
 	text-shadow: none;
 	font-size: 30px;
-	padding: 28px 50px 28px;
+	padding: 27px 50px 27px;
 }
 
 #filters{
 	background: rgba(0,0,0,0.02);
 	-webkit-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.08);
     box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.08);
-    width: 200px;
+    width: 210px;
 	height: 560px;
 	padding: 20px;
 	margin-right: 10px;
 	overflow: scroll;
+	overflow-x: hidden;
 }
 #products{
 	background: #ddd;
@@ -80,21 +80,22 @@ body{
 /* ----------------------- FILTER FORM ----------------------- */
 
 
-form{
+form.search{
 	margin-bottom: 40px;
 }
+form.type{
+	margin-bottom: 45px;
+}
 form.price{
-	margin-bottom: 60px;
+	margin-bottom: 70px;
 }
 label.radio{
 	margin-left: 30px;
 	display: inline-block;
 }
 label.radio2{
-	margin-left: 20px;
+	margin-left: 19px;
 	display: inline-block;
-	position: relative;
-	bottom: 14px;
 }
 div.form-label{
 	float: left;
@@ -106,6 +107,27 @@ label{
 }
 label.checkbox{
 	margin-left: 5px;
+}
+
+.layout-slider { 
+	margin-top: 25px;
+	width: 190px;
+}
+.layout-slider-settings { 
+	font-size: 12px; 
+	padding-bottom: 10px; 
+}
+
+
+/* fix some browser inconsistencies */
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    label.radio2{
+    	position: relative;
+    	bottom: 14px;
+    } 
+    .layout-slider { 
+		margin-top: 10px;
+	}
 }
 
 
@@ -124,6 +146,7 @@ form.search input:focus{
 form.search button{
 	background: url('../img/search-button.png') no-repeat;
 	width: 38px;
+	height: 29px;
 	border: 1px solid transparent;
 }
 form.search button:hover{
@@ -205,19 +228,6 @@ input.checkbox:checked::before {
 	left: 0px; 
 	position: absolute; 
 	display: block;
-}
-
-
-
-
-
-.layout-slider { 
-	margin-top: 10px;
-	width: 190px;
-}
-.layout-slider-settings { 
-	font-size: 12px; 
-	padding-bottom: 10px; 
 }
 
 
