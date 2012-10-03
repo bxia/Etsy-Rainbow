@@ -1,7 +1,8 @@
 <html>
 <head>
 <title>Etsy jQuery Demo</title>
-<script type="application/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/etsy.js"></script>
 <script type="application/javascript">
 (function($){
 
@@ -9,8 +10,8 @@
         $('#etsy-search').bind('submit', function() {
             api_key = "22u5zgz7eze80ymvmqshkdti";
             terms = $('#etsy-terms').val();
-            etsyURL = "http://openapi.etsy.com/v2/public/listings/active.js?keywords="+
-                terms+"&includes=Images:1&api_key="+api_key;
+            etsyURL = "http://openapi.etsy.com/v2/listings/active.js?keywords="+
+                terms+"&limit=120&color=0,100,60&includes=Images:1&api_key="+api_key;
 
             $('#etsy-images').empty();
             $('<p>Searching for '+terms+'</p>').appendTo('#etsy-images');
@@ -20,6 +21,7 @@
                 dataType: 'jsonp',
                 success: function(data) {
                     if (data.ok) {
+                        console.log(data);
                         $('#etsy-images').empty();
                         if (data.count > 0) {
                             $.each(data.results, function(i,item) {
@@ -33,7 +35,6 @@
                         } else {
                             $('<p>No results.</p>').appendTo('#etsy-images');
                         }
-                        console.log(data);
                     } else {
                         $('#etsy-images').empty();
                         alert(data.error);
@@ -47,6 +48,12 @@
         
 })(jQuery);
 </script>
+
+
+<script type="application/javascript">
+</script>
+
+
 </head>
 <body>
     <form id="etsy-search">
@@ -55,5 +62,6 @@
     </form>
         
     <div id="etsy-images"></div>
+    <button onclick="run();"></button>
 </body>
 </html>
