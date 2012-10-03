@@ -9,49 +9,37 @@ var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
 
-/*
- * Make a etsy url request through ajax and use callback to process the data
- */
-// function sendRequest(requestURL,callBack){
-//     // etsyURL = "http://api.etsy.com/v2/public/listings/active.js?keywords="+
-//     //     terms+"&includes=Images,Shop,User:1&api_key="+api_key;
-//     $.ajax({
-//         url: requestURL,
-//         dataType: 'jsonp',
-//         success: function(data) {
-//             callBack(data);
-//         },
-//         error: function(data) {
-//             err(data);
-//         }
-//     });
-// }
-function sendRequest(requestURL,callback) {
-            // api_key = "22u5zgz7eze80ymvmqshkdti";
-            // terms = $('#etsy-terms').val();
-            // etsyURL = "http://openapi.etsy.com/v2/listings/active.js?keywords="+
-            //     terms+"&limit=120&color=0,100,60&includes=Images:1&api_key="+api_key;
-            var etsyURL = requestURL;
+//when_made
+var vintages = {
+    "1980s", "1970s", "1960s", "1950s", "1940s", "1930s", "1920s", "1910s", "1900s", "1800s", "1700s", "before_1700"
+}
 
-          
-            $.ajax({
-                url: etsyURL,
-                dataType: 'jsonp',
-                success: function(data) {
-                    a = new Date().getTime();
-                    console.log(a-b);
-                    if (data.ok) {
-                        callback(data);
-                    } 
-                    else{
-                        err(data);
-                    }
-                }
-                
-            });
+//who_made
+var I_DID = "i_did";
 
-            return false;
+function sendRequest(request,callback) {
+    if(request === undefined
+        || request.requestURL===undefined
+        || request.requestOBJ===undefined) return;
+    var etsyURL = request.requestURL;
+    $.ajax({
+        url: etsyURL,
+        dataType: 'jsonp',
+        success: function(data) {
+            a = new Date().getTime();
+            console.log(a-b);
+            if (data.ok) {
+                callback(data,request.requestOBJ);
+            } 
+            else{
+                err(data);
+            }
         }
+        
+    });
+
+    return false;
+}
 
 /*
  * Takes in a JSON object that specifies the details of the query
@@ -95,11 +83,49 @@ function prepareURL (obj) {
     }
     url+= "&color="+obj.color.trim();
     url+="&color_accuracy=20";
-    url+="&limit=15";
-    return url;
+    url+="&limit=50";
+    return {
+        requestURL : url,
+        requestOBJ : obj
+    };
 
 }
 
+/*
+* Process the data sent back from etsy
+*/
+function process (data,obj) {
+    if(data === undefined)
+        return "No data return from ajax request. Fatal.";
+    if(obj === undefined)
+        return "No obj sepecied to process the returned data. Fatal.";
+    console.log(obj);
+    console.log(data);
+    console.log(data.results);
+    var l = data.results;
+    if(l.length <= 0)
+        return "No matches found";
+
+    var result = undefined; //the most popular listing to return for display.
+
+    for(var i =0;i<l.length; i++){
+        var o = l[i];
+        var category_id = o.category_id;
+        var is_supply = o.is_supply;
+        var when_made = o.when_made;
+        var who_made = o.who_made;
+        var num_favorers = o.num_favorers;
+        var category = getCategory(category_id);
+
+    }
+}
+
+/*
+* Get the category from the given category id
+*/
+function getCategory (cid) {
+    
+}
 
 /*
 * Check if n is a number
@@ -119,7 +145,7 @@ function run () {
         maxPrice : "50"
     }
     console.log(prepareURL(obj));
-	sendRequest(prepareURL(obj),print);
+	sendRequest(prepareURL(obj),process);
 }
 
 function print (data) {
