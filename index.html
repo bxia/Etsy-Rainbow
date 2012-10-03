@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/jslider.round.plastic.css" type="text/css">
 	<!-- end -->
 
-	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	
 	<!-- bin/jquery.slider.min.js -->
 	<script type="text/javascript" src="js/jshashtable-2.1_src.js"></script>
@@ -24,14 +24,6 @@
 	<script type="text/javascript" src="js/draggable-0.1.js"></script>
 	<script type="text/javascript" src="js/jquery.slider.js"></script>
 	<!-- end -->
-	
-	<style type="text/css" media="screen">
-	  body { background: #EEF0F7; }
-	 .layout { padding: 50px; font-family: Georgia, serif; }
-	 .layout-slider { margin-bottom: 60px; width: 50%; }
-	 .layout-slider-settings { font-size: 12px; padding-bottom: 10px; }
-	 .layout-slider-settings pre { font-family: Courier; }
-	</style>
 
 </head>
 <body>
@@ -54,7 +46,7 @@
 				<form class="type">
 					<div class="form-label">Type</div>
 					<label class="radio">
-						<input type="radio" class="radio" name="type" id="all" value="all" checked>
+						<input type="radio" class="radio" name="type" id="type-all" value="all" checked>
 						All
 					</label>
 					<label class="checkbox">
@@ -71,13 +63,90 @@
 					</label>
 				</form>
 
-				<form>
-					    <div class="layout-slider" style="width: 100%">
-					      Slider <span style="display: inline-block; width: 400px; padding: 0 5px;"><input id="Slider1" type="slider" name="price" value="30000.5;60000" /></span>  in string
+				<form class="price">
+					<div class="form-label">Price</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="price" id="price-all" value="all" checked>
+						All
+					</label>
+					<label class="radio2">
+						<input type="radio" class="radio" name="price" id="price-range" value="all" checked>Range
+					</label>
+					   <div class="layout-slider">
+					      <input id="price" type="slider" name="area" value="25;75" />
 					    </div>
 					    <script type="text/javascript" charset="utf-8">
-					      jQuery("#Slider1").slider({ from: 1000, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" });
+					      jQuery("#price").slider({ from: 0, to: 300, heterogeneity: ['50/100', '75/250'], scale: [0, '|', 100, '|', '200', '|', 300], limits: false, step: 1, dimension: '&nbsp;$', skin: "round_plastic" });
 					    </script>
+				</form>
+
+
+				<form class="categories">
+					<div class="form-label">Categories</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="category" id="category-all" value="all" checked>
+						All
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="accessories" class="checkbox">
+						Accessories
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="art" class="checkbox">
+						Art
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="bags" class="checkbox">
+						Bags and Purses
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="bath" class="checkbox">
+						Bath and Beauty
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="books" class="checkbox">
+						Books and Zines
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="candles" class="checkbox">
+						Candles
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="ceramics" class="checkbox">
+						Ceramics and Pottery
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="children" class="checkbox">
+						Children
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="clothing" class="checkbox">
+						Clothing
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="crochet" class="checkbox">
+						Crochet
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="dolls" class="checkbox">
+						Dolls and Miniatures
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="else" class="checkbox">
+						Everything Else
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="furniture" class="checkbox">
+						Furniture
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="geekery" class="checkbox">
+						Geekery
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="glass" class="checkbox">
+						Glass
+					</label>
 				</form>
 
 			</div>
@@ -89,15 +158,4 @@
 			</div>
 		</div>
 	</div>
-
-
-	    <script type="text/javascript" charset="utf-8">
-      
-      jQuery("#Slider5").slider({ from: 480, to: 1020, step: 15, dimension: '', scale: ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'], limits: false, calculate: function( value ){
-        var hours = Math.floor( value / 60 );
-        var mins = ( value - hours*60 );
-        return (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
-      }})
-
-    </script>
 </body>

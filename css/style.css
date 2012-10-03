@@ -63,6 +63,7 @@ body{
 	height: 560px;
 	padding: 20px;
 	margin-right: 10px;
+	overflow: scroll;
 }
 #products{
 	background: #ddd;
@@ -80,8 +81,36 @@ body{
 
 
 form{
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 }
+form.price{
+	margin-bottom: 60px;
+}
+label.radio{
+	margin-left: 30px;
+	display: inline-block;
+}
+label.radio2{
+	margin-left: 20px;
+	display: inline-block;
+	position: relative;
+	bottom: 14px;
+}
+div.form-label{
+	float: left;
+	font-size: 18px;
+	font-family: ArvoRegular, Helvetica, Arial, sans-serif;;
+}
+label{
+	margin-bottom: 7px;
+}
+label.checkbox{
+	margin-left: 5px;
+}
+
+
+
+/* -------- search box style ---------- */
 
 form.search input{
 	background: url('../img/search-box.png') no-repeat;
@@ -108,26 +137,9 @@ form.search button:active{
 
 
 
-div.form-label{
-	float: left;
-	font-size: 18px;
-	font-family: ArvoRegular, Helvetica, Arial, sans-serif;;
-}
-label{
-	margin-bottom: 10px;
-}
-label.radio{
-	margin-left: 70px;
-	padding-top: 2px;
-}
-label.checkbox{
-	margin-left: 5px;
-}
+/* -------- radio button styling ---------- */
 
-
-
-input.radio {
-	background: transparent url('../img/radio.png'); 
+input.radio, input.checkbox{
 	-webkit-appearance: none; 
 	width: 18px; 
 	height: 18px;
@@ -136,6 +148,13 @@ input.radio {
 	right: 6px;
 	overflow: visible; 
 	cursor: pointer;
+}
+
+
+
+
+input.radio {
+	background: transparent url('../img/radio.png'); 
 }
 input.radio:hover{
 	background: transparent url('../img/radio-h.png');
@@ -158,21 +177,13 @@ input.radio:checked::before {
 	position: absolute; 
 	display: block;
 }
-input.radio:checked:active::before {
-	top: 5px;
-}
+input.radio:checked:active::before, input.checkbox:checked:active::before {}
 
+
+/* -------- checkbox styling ---------- */
 
 input.checkbox {
 	background: transparent url('../img/checkbox.png'); 
-	-webkit-appearance: none; 
-	width: 18px; 
-	height: 18px;
-	position: relative;
-	bottom: 3px;
-	right: 6px;
-	overflow: visible; 
-	cursor: pointer;
 }
 input.checkbox:hover{
 	background: transparent url('../img/checkbox-h.png');
@@ -195,16 +206,19 @@ input.checkbox:checked::before {
 	position: absolute; 
 	display: block;
 }
-input.checkbox:checked:active::before {
-	top: 5px;
+
+
+
+
+
+.layout-slider { 
+	margin-top: 10px;
+	width: 190px;
 }
-
-
-
-
-
-
-
+.layout-slider-settings { 
+	font-size: 12px; 
+	padding-bottom: 10px; 
+}
 
 
 
