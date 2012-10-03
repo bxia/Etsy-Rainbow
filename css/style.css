@@ -1,0 +1,210 @@
+/* ----------------------- FONTS ----------------------- */
+
+@font-face {
+    font-family: 'ArvoRegular';
+    src: url('../fonts/Arvo-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'OpenSansLight';
+	src: url('../fonts/OpenSans-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'OpenSansRegular';
+	src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'OpenSansBold';
+	src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+/* ----------------------- LAYOUT ----------------------- */
+
+
+body{
+	font-family: OpenSansRegular, Helvetica, Arial, sans-serif;
+	background: #fcfcfc url('../img/bg.png');
+}
+
+
+
+#container{
+	width: 1180px;
+	padding: 30px 0px;
+}
+.navbar-inner{
+	font-family: ArvoRegular, Helvetica, Arial, sans-serif;
+	height: 75px;
+	background-color: #e98934;
+	background-image: none;
+}
+.navbar-inner .brand{
+	color: #fff;
+	text-shadow: none;
+	font-size: 30px;
+	padding: 28px 50px 28px;
+}
+
+#filters{
+	background: rgba(0,0,0,0.02);
+	-webkit-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.08);
+    width: 200px;
+	height: 560px;
+	padding: 20px;
+	margin-right: 10px;
+}
+#products{
+	background: #ddd;
+	width: 800px;
+	height: 600px;
+}
+#controls{
+	background: #ddd;
+	height: 600px;
+}
+
+
+
+/* ----------------------- FILTER FORM ----------------------- */
+
+
+form{
+	margin-bottom: 30px;
+}
+
+form.search input{
+	background: url('../img/search-box.png') no-repeat;
+	width: 144px;
+	border: 1px solid transparent;
+}
+form.search input:focus{
+	background: url('../img/search-box-focus.png') no-repeat;
+}
+
+form.search button{
+	background: url('../img/search-button.png') no-repeat;
+	width: 38px;
+	border: 1px solid transparent;
+}
+form.search button:hover{
+	background: url('../img/search-button-h.png') no-repeat;
+}
+form.search button:active{
+	background: url('../img/search-button-a.png') no-repeat;
+	width: 38px;
+	border: 1px solid transparent;
+}
+
+
+
+div.form-label{
+	float: left;
+	font-size: 18px;
+	font-family: ArvoRegular, Helvetica, Arial, sans-serif;;
+}
+label{
+	margin-bottom: 10px;
+}
+label.radio{
+	margin-left: 70px;
+	padding-top: 2px;
+}
+label.checkbox{
+	margin-left: 5px;
+}
+
+
+
+input.radio {
+	background: transparent url('../img/radio.png'); 
+	-webkit-appearance: none; 
+	width: 18px; 
+	height: 18px;
+	position: relative;
+	bottom: 3px;
+	right: 6px;
+	overflow: visible; 
+	cursor: pointer;
+}
+input.radio:hover{
+	background: transparent url('../img/radio-h.png');
+}
+input.radio:active{
+	background: transparent url('../img/radio-a.png');
+}
+input.radio:checked{
+	background: transparent url('../img/radio-checked.png');
+}
+input.radio:checked::before {
+	-webkit-appearance: none; 
+	content: ':)'; 
+	text-indent: -9999px;
+	background: url('../img/radio-tick.png') bottom center no-repeat; 
+	width: 9px; 
+	height: 9px; 
+	top: 4px; 
+	left: 4px; 
+	position: absolute; 
+	display: block;
+}
+input.radio:checked:active::before {
+	top: 5px;
+}
+
+
+input.checkbox {
+	background: transparent url('../img/checkbox.png'); 
+	-webkit-appearance: none; 
+	width: 18px; 
+	height: 18px;
+	position: relative;
+	bottom: 3px;
+	right: 6px;
+	overflow: visible; 
+	cursor: pointer;
+}
+input.checkbox:hover{
+	background: transparent url('../img/checkbox-h.png');
+}
+input.checkbox:active{
+	background: transparent url('../img/checkbox-a.png');
+}
+input.checkbox:checked{
+	background: transparent url('../img/checkbox-checked.png');
+}
+input.checkbox:checked::before {
+	-webkit-appearance: none; 
+	content: ':)'; 
+	text-indent: -9999px; 
+	background: url('../img/checkbox-tick.png') bottom center no-repeat; 
+	width: 18px; 
+	height: 18px; 
+	top: 0px; 
+	left: 0px; 
+	position: absolute; 
+	display: block;
+}
+input.checkbox:checked:active::before {
+	top: 5px;
+}
+
+
+
+
+
+
+
+
+
+

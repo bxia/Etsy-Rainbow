@@ -3,24 +3,101 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Etsy Map</title>
-	<link rel="stylesheet" type="text/css" href="bootstrap.min.css" media="all">
-	<link rel="stylesheet" type="text/css" href="style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+
+	<!-- bin/jquery.slider.min.css -->
+	<link rel="stylesheet" href="css/jslider.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.blue.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.plastic.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.round.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.round.plastic.css" type="text/css">
+	<!-- end -->
+
+	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	
+	<!-- bin/jquery.slider.min.js -->
+	<script type="text/javascript" src="js/jshashtable-2.1_src.js"></script>
+	<script type="text/javascript" src="js/jquery.numberformatter-1.2.3.js"></script>
+	<script type="text/javascript" src="js/tmpl.js"></script>
+	<script type="text/javascript" src="js/jquery.dependClass-0.1.js"></script>
+	<script type="text/javascript" src="js/draggable-0.1.js"></script>
+	<script type="text/javascript" src="js/jquery.slider.js"></script>
+	<!-- end -->
+	
+	<style type="text/css" media="screen">
+	  body { background: #EEF0F7; }
+	 .layout { padding: 50px; font-family: Georgia, serif; }
+	 .layout-slider { margin-bottom: 60px; width: 50%; }
+	 .layout-slider-settings { font-size: 12px; padding-bottom: 10px; }
+	 .layout-slider-settings pre { font-family: Courier; }
+	</style>
 
 </head>
 <body>
 	<div id="header" class="navbar navbar-static-top">
 		<div class="navbar-inner">
-			<a class="brand" href="#">Etsy Map</a>
+			<a class="brand" href="#">Etsy Rainbow</a>
 		</div>
 	</div>
 	<div id="container" class="container">
 		<div class="row">
 			<div id="filters" class="span3">
-				Filters
+
+				<form class="search">
+				  <div class="input-append">
+				    <input type="text" class="span2" id="search" placeholder="Search by keyword...">
+				    <button type="submit" class="btn"></button>
+				  </div>
+				</form>
+
+				<form class="type">
+					<div class="form-label">Type</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="type" id="all" value="all" checked>
+						All
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="handmade" class="checkbox">
+						Handmade
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="vintage" class="checkbox">
+						Vintage
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="supplies" class="checkbox">
+						Supplies
+					</label>
+				</form>
+
+				<form>
+					    <div class="layout-slider" style="width: 100%">
+					      Slider <span style="display: inline-block; width: 400px; padding: 0 5px;"><input id="Slider1" type="slider" name="price" value="30000.5;60000" /></span>  in string
+					    </div>
+					    <script type="text/javascript" charset="utf-8">
+					      jQuery("#Slider1").slider({ from: 1000, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" });
+					    </script>
+				</form>
+
 			</div>
-			<div id="map" class="span9">
-				Map
+
+			<div id="products" class="span8">
+			</div>
+			<div id="controls" class="span1">
+				Controls
 			</div>
 		</div>
 	</div>
+
+
+	    <script type="text/javascript" charset="utf-8">
+      
+      jQuery("#Slider5").slider({ from: 480, to: 1020, step: 15, dimension: '', scale: ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'], limits: false, calculate: function( value ){
+        var hours = Math.floor( value / 60 );
+        var mins = ( value - hours*60 );
+        return (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+      }})
+
+    </script>
 </body>
