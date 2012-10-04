@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>Etsy Map</title>
+	<title>Etsy Rainbow</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="all">
 
@@ -25,6 +25,8 @@
 	<script type="text/javascript" src="js/jquery.slider.js"></script>
 	<!-- end -->
 
+	<script src="js/form.js"></script>
+
 </head>
 <body>
 	<div id="header" class="navbar navbar-static-top">
@@ -36,9 +38,9 @@
 		<div class="row">
 			<div id="filters" class="span3">
 
-				<form class="search">
+				<form class="search" id="search">
 				  <div class="input-append">
-				    <input type="text" class="span2" id="search" placeholder="Search by keyword...">
+				    <input type="text" class="span2" id="keyword" placeholder="Search by keyword...">
 				    <button type="submit" class="btn"></button>
 				  </div>
 				</form>
@@ -70,10 +72,10 @@
 						All
 					</label>
 					<label class="radio2">
-						<input type="radio" class="radio" name="price" id="price-range" value="all" checked>Range
+						<input type="radio" class="radio" name="price" id="price-range" value="all">Range
 					</label>
-					   <div class="layout-slider">
-					      <input id="price" type="slider" name="area" value="25;75" />
+					   <div class="layout-slider" id="price-slider">
+					      <input id="price" type="slider" name="area" value="10;100" />
 					    </div>
 					    <script type="text/javascript" charset="utf-8">
 					      jQuery("#price").slider({ from: 0, to: 300, heterogeneity: ['50/100', '75/250'], scale: [0, '|', 100, '|', '200', '|', 300], limits: false, step: 1, dimension: '$', skin: "round_plastic" });
