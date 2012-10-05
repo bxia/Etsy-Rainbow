@@ -8,6 +8,7 @@ var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
 var color_accuracy = 20;
+var searchLimit = 20;
 var resultCache = new Object();
 
 
@@ -66,7 +67,6 @@ function sendRequest(request,callback) {
             }
             else
                 err(data);
-            return 1;
         }
         
     });
@@ -77,7 +77,7 @@ function sendRequest(request,callback) {
 
 /*
  * Takes in a filter object that specifies the details of the query, and convert it into a request url
-    obj required, typeof Filter
+    obj is required, typeof Filter
  */
 function prepareURL (obj) {
     //category and type are processed after the query,so they are not embedded in the request url
@@ -108,7 +108,7 @@ function prepareURL (obj) {
     }
     url+= "&color="+obj.color.trim();
     url+="&color_accuracy=" + color_accuracy;
-    url+="&limit=10";
+    url+="&limit=" + searchLimit;
     console.log(url);
     return {
         requestURL : url,
@@ -168,8 +168,8 @@ function findMostPopular (data,filter) {
         var o = l[i];
         
         var is_supply = o.is_supply.toLowerCase();
-        var when_made = o.when_made.toLowerCase();
-        var who_made = o.who_made.toLowerCase();
+        var when_made = o.when_made;
+        var who_made = o.who_made;
         var num_favorers = o.num_favorers;
         var category = o.category_path[0].toLowerCase();
         var price = o.price;
@@ -225,14 +225,14 @@ function isNumber(n) {
 /*
 * Get the result(the hottest item) for display given the filter specification
 */
-function getAllListings(filter) {
-    if(filter === undefined) return undefined;
+// function getAllListings(filter) {
+//     if(filter === undefined) return undefined;
 
-    if(!isCached(filter))
-        sendRequest(prepareURL(filter), process);
-    return readFromCache(filter);   
+//     if(!isCached(filter))
+//         sendRequest(prepareURL(filter), process);
+//     return readFromCache(filter);   
 
-}
+// }
 
 function run () {
     var filter = new Filter();
@@ -241,8 +241,9 @@ function run () {
     filter.minPrice = "15.00";
     filter.maxPrice = "30.00";
     var result;
-    sendRequest(prepareURL(filter),process);
     
+    //send one request and read the cache till the request in done
+    sendRequest(prepareURL(filter),process);
     var id = setInterval(function () {
         if(readFromCache(filter) !== undefined){
             clearInterval(id);
@@ -254,12 +255,6 @@ function run () {
     }, 500);
 
 
-    // do{
-    //     result = readFromCache(filter);
-
-    // }while(result === undefined)
-
-    //console.log(result);
 
     //console.log(prepareURL(obj));
 	//sendRequest(prepareURL(obj),print);
