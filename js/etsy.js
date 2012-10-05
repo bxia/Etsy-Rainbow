@@ -10,6 +10,7 @@ var FAIL_MSG = "Ajax request failed";
 var color_accuracy = 20;
 var resultCache = new Object();
 
+
 //when_made
 var vintages = [
     "1980s", "1970s", "1960s", "1950s", "1940s", "1930s", "1920s", "1910s", "1900s", "1800s", "1700s", "before_1700"
@@ -60,17 +61,19 @@ function sendRequest(request,callback) {
         url: etsyURL,
         dataType: 'jsonp',
         success: function(data) {
-            a = new Date().getTime();
-            console.log(a-b);
-            if (data.ok)
+            if (data.ok){
                 callback(data,request.requestOBJ);
+            }
             else
                 err(data);
+            return 1;
         }
         
     });
 
+
 }
+
 
 /*
  * Takes in a filter object that specifies the details of the query, and convert it into a request url
@@ -105,7 +108,7 @@ function prepareURL (obj) {
     }
     url+= "&color="+obj.color.trim();
     url+="&color_accuracy=" + color_accuracy;
-    url+="&limit=50";
+    url+="&limit=10";
     console.log(url);
     return {
         requestURL : url,
@@ -143,14 +146,10 @@ function readFromCache (obj) {
 * This is the callback function to any ajax calls to etsy.com
 */
 function process (data,obj) {
-
     if(data === undefined)
         alert( "No data return from ajax request. Fatal." );
     if(obj === undefined)
         alert( "No filter found to process the returned data. Fatal." );
-    console.log(obj);
-    console.log(data);
-    console.log(data.results);
     cache(obj,data);
 }
 
@@ -162,7 +161,7 @@ function findMostPopular (data,filter) {
     if(data.count <= 0)
         return undefined;
     var l = data.results;
-    var result; //the most popular listing to return for display.
+    var result = undefined; //the most popular listing to return for display.
 
     for(var i =0;i<l.length; i++){
 
@@ -179,36 +178,41 @@ function findMostPopular (data,filter) {
         if(
             //typeMatch
             (
-                type==="all" || 
-                (type.indexOf("handmade")!== -1 && who_made===I_DID ) ||
-                (type.indexOf("vintage") !== -1 && vintages.indexOf(when_made) !== -1) ||
-                (type.indexOf("supplies")!== -1 && is_supply=== "true")
+                type==="all" || type === undefined ||
+                (type !== undefined && type.indexOf("handmade")!== -1 && who_made===I_DID ) ||
+                (type !== undefined && type.indexOf("vintage") !== -1 && vintages.indexOf(when_made) !== -1) ||
+                (type !== undefined && type.indexOf("supplies")!== -1 && is_supply=== "true")
             )
             &&
             //categoryMatch
             (
-                cat === "all" || cat.indexOf(category)!== -1
+                cat === "all" || cat === undefined || (cat != undefined && cat.indexOf(category)!== -1)
+            )
+            &&
+            //price range match
+            (
+                (filter.minPrice===undefined && filter.maxPrice === undefined) ||
+                (filter.minPrice !== undefined && isNumber(filter.minPrice) && parseFloat(price)>=parseFloat(filter.minPrice)
+                    && filter.maxPrice !== undefined && isNumber(filter.maxPrice) && parseFloat(price) <= parseFloat(filter.maxPrice)) 
+
+            )
+            //num_favorer check
+            &&
+            (
+                result === undefined || //currently no matching item yet
+                result.num_favorers === undefined ||
+                (num_favorers !== undefined && isNumber(num_favorers) &&
+                    parseFloat(num_favorers) > parseFloat(result.num_favorers))
             )
             
         )
-
-
-        if(num_favorers === undefined 
-            || !isNumber(num_favorers)
-            || result.num_favorers === undefined
-            || !isNumber(result.num_favorers)){
-            continue;
-        }   
+        {
+            result = o;
+        } 
     }
     return result;
 }
 
-/*
-* Get the category from the given category id
-*/
-function getCategory (cid) {
-    
-}
 
 /*
 * Check if n is a number
@@ -231,13 +235,32 @@ function getAllListings(filter) {
 }
 
 function run () {
-    b = new Date().getTime();
-    console.log(b);
-    var obj = {
-        keyword : "book",
-        color : "50,50,60",
-        minPrice : "99.00"
-    };
+    var filter = new Filter();
+    filter.color = "0,100,60";
+    filter.keyword = "book";
+    filter.minPrice = "15.00";
+    filter.maxPrice = "30.00";
+    var result;
+    sendRequest(prepareURL(filter),process);
+    
+    var id = setInterval(function () {
+        if(readFromCache(filter) !== undefined){
+            clearInterval(id);
+            console.log("break");
+            console.log(resultCache);
+            console.log(readFromCache(filter)); 
+            console.log(findMostPopular(readFromCache(filter),filter));
+        }    
+    }, 500);
+
+
+    // do{
+    //     result = readFromCache(filter);
+
+    // }while(result === undefined)
+
+    //console.log(result);
+
     //console.log(prepareURL(obj));
 	//sendRequest(prepareURL(obj),print);
 
@@ -251,7 +274,7 @@ function run () {
 
 }
 
-function print (data) {
+function println (data) {
 	console.log(data);
 }
 
