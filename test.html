@@ -11,11 +11,11 @@
             api_key = "22u5zgz7eze80ymvmqshkdti";
             terms = $('#etsy-terms').val();
             etsyURL = "http://openapi.etsy.com/v2/listings/active.js?keywords="+
-                terms+"&limit=120&color=0,100,60&includes=Images:1&api_key="+api_key;
+                terms+"&limit=12&includes=Images:1&api_key="+api_key;
 
             $('#etsy-images').empty();
             $('<p>Searching for '+terms+'</p>').appendTo('#etsy-images');
-
+            console.log(etsyURL);
             $.ajax({
                 url: etsyURL,
                 dataType: 'jsonp',
