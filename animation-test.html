@@ -1,67 +1,24 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-<title>Etsy jQuery Demo</title>
+<title>Animation Tests</title>
+<link rel="stylesheet" type="text/css" href="css/animation.css" media="all">
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/etsy.js"></script>
-<script type="application/javascript">
-(function($){
-
-    $(document).ready(function(){
-        $('#etsy-search').bind('submit', function() {
-            api_key = "22u5zgz7eze80ymvmqshkdti";
-            terms = $('#etsy-terms').val();
-            etsyURL = "http://openapi.etsy.com/v2/listings/active.js?keywords="+
-                terms+"&limit=120&color=0,100,60&includes=Images:1&api_key="+api_key;
-
-            $('#etsy-images').empty();
-            $('<p>Searching for '+terms+'</p>').appendTo('#etsy-images');
-
-            $.ajax({
-                url: etsyURL,
-                dataType: 'jsonp',
-                success: function(data) {
-                    if (data.ok) {
-                        console.log(data);
-                        $('#etsy-images').empty();
-                        if (data.count > 0) {
-                            $.each(data.results, function(i,item) {
-                                $("<img/>").attr("src", item.Images[0].url_75x75).appendTo("#etsy-images").wrap(
-                                    "<a href='" + item.url + "'></a>"
-                                );
-                                if (i%4 == 3) {
-                                    $('<br/>').appendTo('#etsy-images');
-                                }
-                            });
-                        } else {
-                            $('<p>No results.</p>').appendTo('#etsy-images');
-                        }
-                    } else {
-                        $('#etsy-images').empty();
-                        alert(data.error);
-                    }
-                }
-            });
-
-            return false;
-        })
-    });
-        
-})(jQuery);
-</script>
-
-
+<script type="text/javascript" src="js/animation.js"></script>
 <script type="application/javascript">
 </script>
 
 
 </head>
 <body>
-    <form id="etsy-search">
-        <input id="etsy-terms" size="32">
-        <button>Search!</button>
-    </form>
-        
-    <div id="etsy-images"></div>
-    <button onclick="run();"></button>
+    <div id="wrapper">
+        <div id="block" class="block" onclick="flip()">
+            <div class="front side"></div>
+            <div class="back side"></div>
+        </div>
+        <div id="animation">
+            <canvas id="myCanvas" width="510" height="510"></canvas>
+        </div>
+    </div>
 </body>
 </html>

@@ -48,7 +48,7 @@ window.onload = function(){
 
     $(".jslider-pointer").click(function(){
         update();
-    })
+    });
 
 
 
