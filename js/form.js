@@ -1,8 +1,5 @@
 window.onload = function(){
 
-    var sliderVal = $("#price".value);
-    console.log(sliderVal);
-
     // send search query
     $("#search").submit(function(event){
         event.preventDefault();
@@ -76,6 +73,49 @@ window.onload = function(){
 }
 
 
-function update(){
-    console.log("updating");
+function update(grid){
+    var filter = new Filter();
+
+    // update search keyword
+    filter.keyword = document.getElementById('keyword').value;
+
+    // update type
+    if ($("#type-all").attr("checked") === "checked"){
+        filter.filterType = "all";
+    }
+    else {
+        $("form.type input.checkbox:checked").each(function(){
+            filter.filterType += $(this).attr("value");
+        });
+    }
+
+    // update price range
+    if ($("#price-range").attr("checked") === "checked"){
+        var priceRange = $("#price").attr("value");
+        var delimLoc = priceRange.indexOf(";");
+        filter.minPrice = priceRange.substring(0,delimLoc);
+        filter.maxPrice = priceRange.substring(delimLoc+1,priceRange.length);
+    }
+
+    // update categories
+    if ($("#category-all").attr("checked") === "checked"){
+        filter.category = "all";
+    }
+    else {
+        $("form.categories input.checkbox:checked").each(function(){
+            filter.category += $(this).attr("value");
+        });
+    }
+
+    console.log(filter);
+   
 }
+
+
+
+
+
+
+
+
+
