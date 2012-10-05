@@ -86,8 +86,8 @@ form.search{
 form.type{
 	margin-bottom: 45px;
 }
-form.price{
-	margin-bottom: 70px;
+form.price, form.category{
+	margin-bottom: 20px;
 }
 label.radio{
 	margin-left: 30px;
