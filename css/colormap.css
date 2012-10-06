@@ -1,29 +1,40 @@
 .grid {
     display: inline-block;
-    border-style: solid;
-    border-width: 1px; 
-    height: 98px;
-    width: 98px;
+    height: 100px;
+    width: 100px;
     margin-right: -4px;
     margin-bottom: -5px;
+
+}
+
+.gridBefore{
+    opacity: 0.3;
+    -moz-opacity: 0.3;
+}
+
+.gridAfter{
+    opacity: 1;
+    -moz-opacity: 1;
+        -webkit-transition: all 1s ease-in-out 0s; 
+    -moz-transition: all 1s ease-in-out 0s;
+    -o-transition: all 1s ease-in-out 0s;
+    transition: all 1s ease-in-out 0s;
 }
 
 .color-row{
 	height: 100px;
 }
 
-.grid img{
-    width: 75px;
-    height: 75px;
 
-/*    background-color: #ff0000;
-    border-color: #ff0000;*/
-}
 
 
 .grid .image{
 	width: 75px;
 	height: 75px;
 	background-color: #fff;
-	border: 11px solid #fff;
+
+    border: 9px solid white;
+    position: relative;
+    margin: auto;
+    top: 2px;
 }

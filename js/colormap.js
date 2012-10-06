@@ -8,7 +8,7 @@ var startFrame = [
         [359,  100, 10],
         [20, 100, 10]];
 
-var frame = Array(4);
+var frame = [[],[],[],[]];
      
 
 var zoomLevel = 0;
@@ -16,6 +16,7 @@ var map = $("#grid_map");
 var grids = map.find(".grid");
 
 var lastCenter = undefined;
+var debug = true;
 
 /*
  * Get the hsl code depending on the grid we are on and our current zoom level.
@@ -84,22 +85,13 @@ function hslToRgb(h, s, l){
     return [r * 255, g * 255, b * 255];
 }
 
-function drawMap(op, center) {
-    if (arguments.length === 2) {
-        zoom(op, center);
-    } else if (arguments.length === 1) {
-        if (op === "out" && lastCenter !== undefined) {
-            zoom(op, lastCenter);
-            lastCenter = undefined;
-        } else if (op === "reset"){
-            frame[0] = $.extend(true, [], startFrame[0]);
-            frame[1] = $.extend(true, [], startFrame[1]);
-            frame[2] = $.extend(true, [], startFrame[2]);
-        } else {
-            zoom(op);
-        }
+function debugLog(msg) {
+    if (debug === true) {
+        console.log(msg);
     }
+}
 
+function drawMap() {
     $.each(grids, function(index, value) {
         // get hsl value of this grid
         var gridId = value.id;
@@ -107,10 +99,9 @@ function drawMap(op, center) {
         var hslStr = Math.floor(hsl[0]) + "," + 
                      Math.floor(hsl[1]) + "," +
                      Math.floor(hsl[2]);
+        // $(this).html(hslStr);
         
         var element = $(this);
-        element.html("<div class='image'></div>");
-
 
         // scale hsl, convert to hsv and scale back
         var hsv = hsl2hsv(hsl[0], hsl[1]/100, hsl[2]/100);
@@ -124,13 +115,16 @@ function drawMap(op, center) {
                      Math.floor(rgb[0]) + ", " + 
                      Math.floor(rgb[1]) + ", " + 
                      Math.floor(rgb[2]) + ")"
-        //$(this).css("background-color", rgbStr);
+        $(this).css("background-color", rgbStr);
+        $(this).addClass("gridBefore");
+
     });
 }
 
+
 function zoom(dir, center) {
-    var xDelta = (frame[0][0] - frame[1][0])/(COL-1);
-    var yDelta = (frame[0][2] - frame[2][2])/(ROW-1);
+    var xDelta = (startFrame[0][0] - startFrame[1][0])/(COL-1);
+    var yDelta = (startFrame[0][2] - startFrame[2][2])/(ROW-1);
     var xZoomDeltaLeft = xDelta / 2;
     var xZoomDeltaRight = xZoomDeltaLeft;
     var yZoomDeltaUp = yDelta / 2;
@@ -166,19 +160,26 @@ function zoom(dir, center) {
 
     if (dir === "out") { // out is the reverse of in
         if (zoomLevel === 0) {
+            debugLog("level = " + zoomLevel + ", cannot zoom out");
             return;
         }
+        debugLog("zooming out from: " + lastCenter);
+        debugLog("zoomLevel after zoom out: " + zoomLevel);
         xZoomDeltaLeft *= -1;
         xZoomDeltaRight *= -1;
         yZoomDeltaUp *= -1;
         yZoomDeltaDown *= -1;
         zoomLevel -= 1;
+        lastCenter = undefined;
     } else if (dir === "in") {
         if (zoomLevel === 5) {
+            debugLog("level = " + zoomLevel + ", cannot zoom in");
             return;
         }
         zoomLevel += 1;
         lastCenter = center;
+        debugLog("zooming in to: " + lastCenter);
+        debugLog("zoomLevel after zoom in: " + zoomLevel);
     }
     // change upper left
     frame[0][0] = frame[0][0] - xZoomDeltaLeft;
@@ -192,55 +193,119 @@ function zoom(dir, center) {
     // change lower right
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
+
+    drawMap();
 }
 
-function start() {
+function reset() {
     frame[0] = $.extend(true, [], startFrame[0]);
     frame[1] = $.extend(true, [], startFrame[1]);
     frame[2] = $.extend(true, [], startFrame[2]);
+    debugLog("redrawing map from start");
+    drawMap();
+}
+
+function move(dir) {
+    if (zoomLevel <= 1) {
+        debugLog("at top 2 level, cannot move");
+        return;
+    }
+
+    var xDelta = (startFrame[0][0] - startFrame[1][0])/(COL-1);
+    var yDelta = (startFrame[0][2] - startFrame[2][2])/(ROW-1);
+    if (dir === "up") {
+        if (frame[0][2] >= startFrame[0][2]) {
+            debugLog("reached top, cannot move up");
+            return;
+        }
+        for (var i=0; i<frame.length; i++) {
+            debugLog("moving up by: " + yDelta);
+            frame[i][2] += yDelta;
+        }
+    } else if (dir === "down") {
+        if (frame[2][2] <= startFrame[2][2]) {
+            debugLog("reached bottom, cannot move down");
+            return;
+        }
+        for (var i=0; i<frame.length; i++) {
+            frame[i][2] -= yDelta;
+        }
+    } else if (dir === "left") {
+        if (frame[0][0] >= startFrame[0][0]) {
+            debugLog("reached start, cannot move left");
+            return;
+        }
+        for (var i=0; i<frame.length; i++) {
+            frame[i][0] += xDelta;
+        }
+    } else {
+        if (frame[1][0] <= startFrame[1][0]) {
+            debugLog("reached end, cannot move right");
+            return;
+        }
+        for (var i=0; i<frame.length; i++) {
+            frame[i][0] -= xDelta;
+        }
+    }
 
     drawMap();
+}
 
+function start() {
+
+    reset();
 
     var inButton = document.getElementById("inButton");
     inButton.onclick = function() {
-        drawMap("in");
+        zoom("in");
     }
     var outButton = document.getElementById("outButton");
     outButton.onclick = function() {
-        drawMap("out");
+        if (lastCenter !== undefined) {
+            zoom("out", lastCenter);
+        } else {
+            zoom("out");
+        }
     }
     var resetButton = document.getElementById("resetButton");
     resetButton.onclick = function() {
-        drawMap("reset");
+        reset();
     }
 
-    // var upButton = document.getElementById("upButton");
-    // upButton.onclick = function() {
-    //     drawMap("reset");
-    // }
-
-    // var downButton = document.getElementById("downButton");
-    // downButton.onclick = function() {
-    //     drawMap("reset");
-    // }
-
-    // var leftButton = document.getElementById("leftButton");
-    // leftButton.onclick = function() {
-    //     drawMap("reset");
-    // }
-
-    // var rightButton = document.getElementById("rightButton");
-    // rightButton.onclick = function() {
-    //     drawMap("reset");
-    // }
-
-    $.each(grids, function(index, value) {
-        // console.log($(this));
-        $(this).dblclick(function() {
-            drawMap("in", value.id);
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            alert($(window).scrollTop());
         });
     });
+
+    // $(document).ready(function() {
+    //     $(".grid").smoothDivScroll(function(event) {
+    //         alert("BBBBBB");
+    //         debugLog($(this).attr("id"));
+    //         zoom("in", $(this).attr("id"));
+    //         event.preventDefault();
+    //     });
+    // });
+
+    var upButton = document.getElementById("upButton");
+    upButton.onclick = function() {
+        move("up");
+    }
+
+    var downButton = document.getElementById("downButton");
+    downButton.onclick = function() {
+        move("down");
+    }
+
+    var leftButton = document.getElementById("leftButton");
+    leftButton.onclick = function() {
+        move("left");
+    }
+
+    var rightButton = document.getElementById("rightButton");
+    rightButton.onclick = function() {
+        move("right");
+    }
 }
 
 start();
