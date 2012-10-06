@@ -118,7 +118,6 @@ function prepareURL (obj,grid,i) {
     url+="&color_accuracy=" + color_accuracy;
     url+="&limit=" + searchLimit;
     url+="&includes=Images:1,Shop";
-    console.log(url);
     return {
         requestURL : url,
         requestOBJ : obj,
@@ -247,6 +246,13 @@ function isNumber(n) {
 function updateOneGrid(data,request){
     var grid = request.requestGRID;
     var filter = request.requestOBJ;
+    cache(filter,data);
+    if(grid.lvl !== zoomLevel){
+        console.log("request didn't display because saved zoomlvl= " + grid.lvl +" but currr is " + zoomLevel);
+        return;
+    } 
+
+    
     var result = findMostPopular(data,filter);
     if(result === undefined){
         grid.el.html("<div class='image'></div>");
@@ -260,7 +266,7 @@ function updateOneGrid(data,request){
             title = title.substring(0,27) + "...";
         var url = result.url;
         var shopURL = result.Shop.url;
-        var shopName = result.Shop.shop_name;
+        var shopName = result.Shop.shop_name; 
         if(description.length >= 110)
             description = description.substring(0,110) + "...";
 
@@ -339,7 +345,8 @@ function run () {
         allGrids.push({
             id : gridId,
             color : hsv[0]+","+hsv[1]+","+hsv[2],
-            el : element
+            el : element,
+            lvl : zoomLevel
         });
     });
 
@@ -353,7 +360,13 @@ function run () {
             var filter = new Filter();
             filter.color = grid.color;
             filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,0),updateOneGrid);
+            if(readFromCache(filter) === undefined){
+                sendRequest(prepareURL(filter,grid,0),updateOneGrid);
+            }
+            else{
+                updateOneGrid(readFromCache(filter),prepareURL(filter,grid,0));
+            }
+            
             
             i1++;
         }
@@ -368,7 +381,12 @@ function run () {
             var filter = new Filter();
             filter.color = grid.color;
             filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,1),updateOneGrid);
+            if(readFromCache(filter) === undefined){
+                sendRequest(prepareURL(filter,grid,1),updateOneGrid);
+            }
+            else{
+                updateOneGrid(readFromCache(filter),prepareURL(filter,grid,1));
+            }
             
             i2++;
         }
@@ -383,7 +401,12 @@ function run () {
     //         var filter = new Filter();
     //         filter.color = grid.color;
     //         filter.keyword=  "book";
-    //         sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+    //         if(readFromCache(filter) === undefined){
+            //     sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+            // }
+            // else{
+            //     updateOneGrid(readFromCache(filter),prepareURL(filter,grid,2));
+            // }
             
     //         i3++;
     //     }
@@ -398,7 +421,12 @@ function run () {
     //         var filter = new Filter();
     //         filter.color = grid.color;
     //         filter.keyword=  "book";
-    //         sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+    //         if(readFromCache(filter) === undefined){
+            //     sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+            // }
+            // else{
+            //     updateOneGrid(readFromCache(filter),prepareURL(filter,grid,3));
+            // }
             
     //         i4++;
     //     }
@@ -413,8 +441,12 @@ function run () {
     //         var filter = new Filter();
     //         filter.color = grid.color;
     //         filter.keyword=  "book";
-    //         sendRequest(prepareURL(filter,grid,4),updateOneGrid);
-            
+    //         if(readFromCache(filter) === undefined){
+            //     sendRequest(prepareURL(filter,grid,4),updateOneGrid);
+            // }
+            // else{
+            //     updateOneGrid(readFromCache(filter),prepareURL(filter,grid,4));
+            // }
     //         i5++;
     //     }
     // },205);
@@ -428,8 +460,12 @@ function run () {
     //         var filter = new Filter();
     //         filter.color = grid.color;
     //         filter.keyword=  "book";
-    //         sendRequest(prepareURL(filter,grid,5),updateOneGrid);
-            
+    //         if(readFromCache(filter) === undefined){
+            //     sendRequest(prepareURL(filter,grid,5),updateOneGrid);
+            // }
+            // else{
+            //     updateOneGrid(readFromCache(filter),prepareURL(filter,grid,5));
+            // }
     //         i6++;
     //     }
     // },205);
