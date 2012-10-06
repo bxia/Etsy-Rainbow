@@ -1,51 +1,7 @@
-/* ----------------------- FONTS ----------------------- */
-
-@font-face {
-    font-family: 'ArvoRegular';
-    src: url('../fonts/Arvo-Regular-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-	font-family: 'OpenSansLight';
-	src: url('../fonts/OpenSans-Light.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'OpenSansRegular';
-	src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'OpenSansBold';
-	src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
-
-
-/* ----------------------- LAYOUT ----------------------- */
-
-
-body{
-	font-family: OpenSansRegular, Helvetica, Arial, sans-serif;
-	background: #fcfcfc url('../img/bg.png');
-}
-
-
-#wrapper{
-	padding: 50px;
-	padding-bottom: 100px;
-}
 
 .block {
-    position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 98px;
+    height: 98px;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1s;
     -moz-transform-style: preserve-3d;
@@ -53,31 +9,37 @@ body{
     transform-style: preserve-3d;
     transition: transform 1s;
 }
-.rotated{
+
+.grid img{
+    width: 75px;
+    height: 75px;
+}
+
+/*.rotated{
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
 .side{
-    position: absolute;
+    position: relative;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     border: 2px solid #f55d5d;
 }
 .front{
-    height: 100px;
-    width: 100px;
+    height: 96px;
+    width: 96px;
     background-color: #FFF;
 }
 .back{
-    height: 100px;
-    width: 100px;
+    height: 96px;
+    width: 96px;
     background-color: #f55d5d;
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
-}
+}*/
 
 /* wait message */
 
