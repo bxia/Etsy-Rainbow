@@ -3,7 +3,10 @@ var _LISTING_ = "/listings/active.js";
 var _KEY1_ = "&api_key=22u5zgz7eze80ymvmqshkdti";
 var _KEY2_ = "&api_key=2ufyxjd5wccvgcm0yb61jp7b";
 var _KEY3_ = "&api_key=hr7dbzisuo6y56soguanj071";
-var a,b;
+var _KEY4_ = "&api_key=tmo7w4tcorpv50ccnt2nj4n5";
+var _KEY5_ = "&api_key=l7yd3rcwklc1g3gnl89z4qru";
+var _KEY6_ = "&api_key=xt4c9qkyu9hmt139xrsqiyja";
+var _KEY_ARRAY_ = [_KEY1_,_KEY2_,_KEY3_,_KEY4_,_KEY5_,_KEY6_];
 var OK = 1;
 var ERR = -1;
 var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
@@ -13,7 +16,7 @@ var color_accuracy = 20;
 var searchLimit = 30;
 var resultCache = new Object();
 var storedImages = new Array();
-
+var clicked= false;
 //when_made
 var vintages = [
     "1980s", "1970s", "1960s", "1950s", "1940s", "1930s", "1920s", "1910s", "1900s", "1800s", "1700s", "before_1700"
@@ -86,7 +89,7 @@ function sendRequest(request,callback) {
 function prepareURL (obj,grid,i) {
     //category and type are processed after the query,so they are not embedded in the request url
     //only color is required
-    var key = (i===1)? _KEY1_ : ((i===2)? _KEY2_: ((i===3)? _KEY3_: "") );
+    var key = _KEY_ARRAY_[i];
     var url = _URL_ + _LISTING_ + "?" + key;
     if(obj === undefined) return;
     if(obj.color === undefined) return; 
@@ -113,7 +116,7 @@ function prepareURL (obj,grid,i) {
     url+= "&color="+obj.color.trim();
     url+="&color_accuracy=" + color_accuracy;
     url+="&limit=" + searchLimit;
-    url+="&includes=Images:1";
+    url+="&includes=Images:1,Shop";
     console.log(url);
     return {
         requestURL : url,
@@ -245,12 +248,36 @@ function updateOneGrid(data,request){
     var filter = request.requestOBJ;
     var result = findMostPopular(data,filter);
     if(result === undefined){
-        grid.el.html("<img/>");
+        grid.el.html("<div class='image'></div>");
     }
     else{
-        grid.el.html("<img src='"+ result.Images[0].url_75x75 +"'/>");
-    }
+        var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
+        var content = "popup content";
+        var price = result.price;
+        var description = result.description;
+        var title = result.title;
+        var url = result.url;
+        console.log(result);
+        // <a  rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
+        // <button class="btn">Toggle Popover</button>
+        // </a>
+        // grid.el.html("<a href='#' rel='popover' data-content='bal' class='popup-marker' style='display: inline-block; width: 100px; height: 100px;'><div class='image' data-content="+content+" style="+ style + "></div></a>");
+        //grid.el.html("<a rel='popover' data-content='blach' class='open'> Toggle</a>");
+        grid.el.html("<div class='image popup-marker' data-content='<a href=http://www.google.com>Google </a>' style="+ style + " id='a"+ grid.id+ "'></div>");
 
+    $('#a'+grid.id).popover({
+    html: true,
+    trigger: 'manual'}).click(function(e) { 
+        var l = ($('.popup-marker'));
+        for(var i=0;i<l.length;i++){
+            if( $(l[i])[0].id === 'a'+grid.id) continue;
+            ($(l[i]).popover('hide'));  
+        }
+        $(this).popover('show');
+        clicked=true;
+        e.preventDefault();
+    });
+    }
 }   
 
 function run () {
@@ -284,6 +311,7 @@ function run () {
 
 
         var element = $(this);
+//        element.html("<div class="image"></div>");
 
         // scale hsl, convert to hsv and scale back
         var hsv = hsl2hsv(hsl[0], hsl[1]/100, hsl[2]/100);
@@ -305,18 +333,9 @@ function run () {
         });
     });
 
-    // for(var i =0;i<allGrids.length;i++){
-    //     var filter = new Filter();
-    //     filter.color = allGrids[i].color;
-    //     filter.keyword = "book";
-    //     // setTimeout(sendRequest(prepareURL(filter),updateOneGrid), i*250);
-    //     setTimeout(console.log(allGrids[i]), i*2150);
-
-    // }
-    var i1=0, i2=16,i3 = 32;
-    
+    var i1=0, i2=8,i3 = 16,i4=24,i5=32,i6=40;    
     var loadId1 = setInterval(function() {
-        if(i1>=16){
+        if(i1>=8){
             clearInterval(loadId1);
         }
         else{
@@ -324,42 +343,99 @@ function run () {
             var filter = new Filter();
             filter.color = grid.color;
             filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,1),updateOneGrid);
+            sendRequest(prepareURL(filter,grid,0),updateOneGrid);
             
             i1++;
         }
     },205);
 
-    var loadId2 = setInterval(function() {
-        if(i2>=32){
-            clearInterval(loadId1);
-        }
-        else{
-            var grid = allGrids[i2];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+    // var loadId2 = setInterval(function() {
+    //     if(i2>=16){
+    //         clearInterval(loadId2);
+    //     }
+    //     else{
+    //         var grid = allGrids[i2];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,1),updateOneGrid);
             
-            i2++;
-        }
-    },205);
+    //         i2++;
+    //     }
+    // },205);
 
-    var loadId3 = setInterval(function() {
-        if(i3>=48){
-            clearInterval(loadId1);
-        }
-        else{
-            var grid = allGrids[i3];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+    // var loadId3 = setInterval(function() {
+    //     if(i3>=24){
+    //         clearInterval(loadId3);
+    //     }
+    //     else{
+    //         var grid = allGrids[i3];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,2),updateOneGrid);
             
-            i3++;
-        }
-    },205);
+    //         i3++;
+    //     }
+    // },205);
 
+    // var loadId4 = setInterval(function() {
+    //     if(i4>=32){
+    //         clearInterval(loadId4);
+    //     }
+    //     else{
+    //         var grid = allGrids[i4];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+            
+    //         i4++;
+    //     }
+    // },205);
+
+    // var loadId5 = setInterval(function() {
+    //     if(i5>=40){
+    //         clearInterval(loadId5);
+    //     }
+    //     else{
+    //         var grid = allGrids[i5];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,4),updateOneGrid);
+            
+    //         i5++;
+    //     }
+    // },205);
+
+    // var loadId6 = setInterval(function() {
+    //     if(i6>=48){
+    //         clearInterval(loadId6);
+    //     }
+    //     else{
+    //         var grid = allGrids[i6];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,5),updateOneGrid);
+            
+    //         i6++;
+    //     }
+    // },205);
+
+    $(document).click(function(e) {
+    if(clicked){ 
+        clicked=false;
+        return;
+    }
+    var l = ($('.popup-marker'));
+    for(var i=0;i<l.length;i++){
+       ($(l[i]).popover('hide'));  
+    }
+    clicked = false;
+
+    });
 
     
 

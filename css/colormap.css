@@ -15,8 +15,15 @@
 .grid img{
     width: 75px;
     height: 75px;
-    border: 11px solid #fff;
 
 /*    background-color: #ff0000;
     border-color: #ff0000;*/
+}
+
+
+.grid .image{
+	width: 75px;
+	height: 75px;
+	background-color: #fff;
+	border: 11px solid #fff;
 }
