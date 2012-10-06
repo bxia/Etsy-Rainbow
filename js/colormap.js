@@ -212,28 +212,28 @@ function start() {
         drawMap("reset");
     }
 
-    var upButton = document.getElementById("upButton");
-    upButton.onclick = function() {
-        drawMap("reset");
-    }
+    // var upButton = document.getElementById("upButton");
+    // upButton.onclick = function() {
+    //     drawMap("reset");
+    // }
 
-    var downButton = document.getElementById("downButton");
-    downButton.onclick = function() {
-        drawMap("reset");
-    }
+    // var downButton = document.getElementById("downButton");
+    // downButton.onclick = function() {
+    //     drawMap("reset");
+    // }
 
-    var leftButton = document.getElementById("leftButton");
-    leftButton.onclick = function() {
-        drawMap("reset");
-    }
+    // var leftButton = document.getElementById("leftButton");
+    // leftButton.onclick = function() {
+    //     drawMap("reset");
+    // }
 
-    var rightButton = document.getElementById("rightButton");
-    rightButton.onclick = function() {
-        drawMap("reset");
-    }
+    // var rightButton = document.getElementById("rightButton");
+    // rightButton.onclick = function() {
+    //     drawMap("reset");
+    // }
 
     $.each(grids, function(index, value) {
-        console.log($(this));
+        // console.log($(this));
         $(this).dblclick(function() {
             drawMap("in", value.id);
         });
