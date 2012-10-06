@@ -5,5 +5,10 @@ KEYSTRING 22u5zgz7eze80ymvmqshkdti
 SHARED SECRETnvs5ykvwa7
 
 
+KEYSTRING   hr7dbzisuo6y56soguanj071
+SHARED SECRET   uags51xnu6
+
+
+
 Google map v3 api
 AIzaSyDSTRogO00u6VOzuOZ5ce3YRbhLZb5pgFw
