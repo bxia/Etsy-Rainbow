@@ -2,6 +2,12 @@ var ROW = 6;
 var COL = 8;
 
 // the frame in hsl at the begining
+var startFrame = [
+        [359,  100, 90],
+        [20, 100, 90],
+        [359,  100, 10],
+        [20, 100, 10]];
+
 var frame = [
         [359,  100, 90],
         [20, 100, 90],
@@ -11,6 +17,8 @@ var frame = [
 var zoomLevel = 0;
 var map = $("#grid_map");
 var grids = map.find(".grid");
+
+var lastCenter = undefined;
 
 /*
  * Get the hsl code depending on the grid we are on and our current zoom level.
@@ -79,11 +87,20 @@ function hslToRgb(h, s, l){
     return [r * 255, g * 255, b * 255];
 }
 
-function drawMap(dir, center) {
+function drawMap(op, center) {
     if (arguments.length === 2) {
-        zoom(dir, center);
+        zoom(op, center);
     } else if (arguments.length === 1) {
-        zoom(dir);
+        if (op === "out" && lastCenter !== undefined) {
+            zoom(op, lastCenter);
+            lastCenter = undefined;
+        } else if (op === "reset"){
+            frame[0] = $.extend(true, [], startFrame[0]);
+            frame[1] = $.extend(true, [], startFrame[1]);
+            frame[2] = $.extend(true, [], startFrame[2]);
+        } else {
+            zoom(op);
+        }
     }
 
     $.each(grids, function(index, value) {
@@ -119,7 +136,7 @@ function zoom(dir, center) {
     var yZoomDeltaUp = yDelta / 2;
     var yZoomDeltaDown = yZoomDeltaUp;
     
-    if (arguments.length == 2) {
+    if (arguments.length === 2) {
         var hsv = getHsl(center, frame);
         // case 1: left side not enough room
         var xLeftDiff = frame[0][0] - hsv[0];
@@ -142,20 +159,26 @@ function zoom(dir, center) {
         // case 4: lower side
         var yDownDiff = hsv[2] - frame[2][2];
         if (hsv[2] - frame[2][2] < yZoomDeltaDown) {
-            yZoomDeltaDown = yDownDiffDiff;
+            yZoomDeltaDown = yDownDiff;
             yZoomDeltaUp += yZoomDeltaDown - yDownDiff;
         }
     }
 
     if (dir === "out") { // out is the reverse of in
-        if (zoomLevel === 0) return;
+        if (zoomLevel === 0) {
+            return;
+        }
         xZoomDeltaLeft *= -1;
         xZoomDeltaRight *= -1;
         yZoomDeltaUp *= -1;
         yZoomDeltaDown *= -1;
         zoomLevel -= 1;
     } else if (dir === "in") {
+        if (zoomLevel === 5) {
+            return;
+        }
         zoomLevel += 1;
+        lastCenter = center;
     }
     // change upper left
     frame[0][0] = frame[0][0] - xZoomDeltaLeft;
@@ -174,16 +197,45 @@ function zoom(dir, center) {
 function start() {
     drawMap();
 
-    var button = document.getElementById("inButton");
-    button.onclick = function() {
+    frame[0] = $.extend(true, [], startFrame[0]);
+    frame[1] = $.extend(true, [], startFrame[1]);
+    frame[2] = $.extend(true, [], startFrame[2]);
+
+    var inButton = document.getElementById("inButton");
+    inButton.onclick = function() {
         drawMap("in");
     }
-    var button = document.getElementById("outButton");
-    button.onclick = function() {
+    var outButton = document.getElementById("outButton");
+    outButton.onclick = function() {
         drawMap("out");
+    }
+    var resetButton = document.getElementById("resetButton");
+    resetButton.onclick = function() {
+        drawMap("reset");
+    }
+
+    var upButton = document.getElementById("upButton");
+    upButton.onclick = function() {
+        drawMap("reset");
+    }
+
+    var downButton = document.getElementById("downButton");
+    downButton.onclick = function() {
+        drawMap("reset");
+    }
+
+    var leftButton = document.getElementById("leftButton");
+    leftButton.onclick = function() {
+        drawMap("reset");
+    }
+
+    var rightButton = document.getElementById("rightButton");
+    rightButton.onclick = function() {
+        drawMap("reset");
     }
 
     $.each(grids, function(index, value) {
+        console.log($(this));
         $(this).dblclick(function() {
             drawMap("in", value.id);
         });

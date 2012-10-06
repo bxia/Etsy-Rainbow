@@ -1,9 +1,12 @@
 Etsy API KEY
 
-APP NAME15237 unit project
-KEYSTRING 22u5zgz7eze80ymvmqshkdti
-SHARED SECRETnvs5ykvwa7
+Wang Zi:
+    APP NAME15237 unit project
+    KEYSTRING 22u5zgz7eze80ymvmqshkdti
+    SHARED SECRETnvs5ykvwa7
 
 
-Google map v3 api
-AIzaSyDSTRogO00u6VOzuOZ5ce3YRbhLZb5pgFw
+Ruoyu Li:
+    Rainbow
+    KEYSTRING2ufyxjd5wccvgcm0yb61jp7b
+    SHARED SECRETui4uutk6y7
