@@ -3,8 +3,9 @@
 <head>
 <title>Animation Tests</title>
 <link rel="stylesheet" type="text/css" href="css/animation.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/animation.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="application/javascript">
 	function flip(){
 	    if(document.getElementById("block").className == "block"){
@@ -30,5 +31,16 @@
             <canvas id="myCanvas" width="510" height="510"></canvas>
         </div>
     </div>
+
+    <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="popover">
+        <button class="btn">Toggle Popover</button>
+    </a>
+    <script>
+        $(function ()  
+            { $("#popover").popover();  
+        }); 
+    </script>
+
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
