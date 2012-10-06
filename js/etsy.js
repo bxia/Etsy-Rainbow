@@ -116,7 +116,7 @@ function prepareURL (obj,grid,i) {
     url+= "&color="+obj.color.trim();
     url+="&color_accuracy=" + color_accuracy;
     url+="&limit=" + searchLimit;
-    url+="&includes=Images:1";
+    url+="&includes=Images:1,Shop";
     console.log(url);
     return {
         requestURL : url,
@@ -253,7 +253,11 @@ function updateOneGrid(data,request){
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
         var content = "popup content";
-
+        var price = result.price;
+        var description = result.description;
+        var title = result.title;
+        var url = result.url;
+        console.log(result);
         // <a  rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
         // <button class="btn">Toggle Popover</button>
         // </a>
