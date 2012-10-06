@@ -109,7 +109,6 @@ function drawMap(op, center) {
                      Math.floor(hsl[2]);
         
         var element = $(this);
-        element.html("<div class='image'></div>");
 
 
         // scale hsl, convert to hsv and scale back
@@ -124,7 +123,10 @@ function drawMap(op, center) {
                      Math.floor(rgb[0]) + ", " + 
                      Math.floor(rgb[1]) + ", " + 
                      Math.floor(rgb[2]) + ")"
-        //$(this).css("background-color", rgbStr);
+        $(this).css("background-color", rgbStr);
+        
+        $(this).addClass("gridBefore");
+
     });
 }
 

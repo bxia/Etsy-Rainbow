@@ -1,7 +1,7 @@
 
 .block {
-    width: 98px;
-    height: 98px;
+    width: 100px;
+    height: 100px;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1s;
     -moz-transform-style: preserve-3d;
@@ -199,5 +199,27 @@ bottom:5px;
 
 100%{
 -ms-transform:scale(.3)}
+
+}
+
+
+
+.image  {
+    -moz-opacity: 0.00;
+    opacity: 0.00;
+
+    -webkit-transition: all 1s ease-in-out 0s; 
+    -moz-transition: all 1s ease-in-out 0s;
+    -o-transition: all 1s ease-in-out 0s;
+    transition: all 1s ease-in-out 0s;
+}
+
+.after{
+    -moz-opacity: 1.00;
+    opacity: 1.00;
+    -webkit-transition: all 1s ease-in-out 0s; 
+    -moz-transition: all 1s ease-in-out 0s;
+    -o-transition: all 1s ease-in-out 0s;
+    transition: all 1s ease-in-out 0s;    
 
 }
