@@ -1,16 +1,18 @@
 var _URL_ = "http://api.etsy.com/v2/public";
 var _LISTING_ = "/listings/active.js";
-var _KEY_ = "&api_key=22u5zgz7eze80ymvmqshkdti";
+var _KEY1_ = "&api_key=22u5zgz7eze80ymvmqshkdti";
+var _KEY2_ = "&api_key=2ufyxjd5wccvgcm0yb61jp7b";
+var _KEY3_ = "&api_key=hr7dbzisuo6y56soguanj071";
 var a,b;
 var OK = 1;
 var ERR = -1;
 var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
-var color_accuracy = 10;
+var color_accuracy = 20;
 var searchLimit = 30;
 var resultCache = new Object();
-
+var storedImages = new Array();
 
 //when_made
 var vintages = [
@@ -81,11 +83,11 @@ function sendRequest(request,callback) {
  * Takes in a filter object that specifies the details of the query, and convert it into a request url
     obj is required, typeof Filter
  */
-function prepareURL (obj,grid) {
+function prepareURL (obj,grid,i) {
     //category and type are processed after the query,so they are not embedded in the request url
     //only color is required
-
-    var url = _URL_ + _LISTING_ + "?" + _KEY_;
+    var key = (i===1)? _KEY1_ : ((i===2)? _KEY2_: ((i===3)? _KEY3_: "") );
+    var url = _URL_ + _LISTING_ + "?" + key;
     if(obj === undefined) return;
     if(obj.color === undefined) return; 
     if(obj.keyword !== undefined && obj.keyword.trim().length >0){
@@ -145,17 +147,6 @@ function readFromCache (obj) {
     return resultCache[obj.key()];
 }
 
-/*
-* Process the data sent back from etsy and put it in the cache.
-* This is the callback function to any ajax calls to etsy.com
-*/
-function process (data,obj) {
-    if(data === undefined)
-        alert( "No data return from ajax request. Fatal." );
-    if(obj === undefined)
-        alert( "No filter found to process the returned data. Fatal." );
-    cache(obj,data);
-}
 
 /*
 *   Takes in an object sent back from etsy.com with listings.
@@ -180,6 +171,9 @@ function findMostPopular (data,filter) {
         var type = filter.filterType;
         var cat  = filter.category;
         if(
+            //image can't be duplicate
+            storedImages.indexOf(o.Images[0].url_75x75) === -1
+            &&
             //typeMatch
             (
                 type==="all" || type === undefined ||
@@ -214,6 +208,7 @@ function findMostPopular (data,filter) {
             result = o;
         } 
     }
+    storedImages.push(result.Images[0].url_75x75);
     return result;
 }
 
@@ -259,6 +254,7 @@ function updateOneGrid(data,request){
 }   
 
 function run () {
+    storedImages = new Array();
     var filter = new Filter();
     // filter.color = "0,100,60";
     filter.keyword = "book";
@@ -317,20 +313,55 @@ function run () {
     //     setTimeout(console.log(allGrids[i]), i*2150);
 
     // }
-    var i=0;
-    var loadId = setInterval(function  (argument) {
-        if(i>=allGrids.length){
-            clearInterval(loadId);
+    var i1=0, i2=16,i3 = 32;
+    
+    var loadId1 = setInterval(function() {
+        if(i1>=16){
+            clearInterval(loadId1);
         }
         else{
-            var grid = allGrids[i];
+            var grid = allGrids[i1];
             var filter = new Filter();
             filter.color = grid.color;
             filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid),updateOneGrid);
-            i++;
+            sendRequest(prepareURL(filter,grid,1),updateOneGrid);
+            
+            i1++;
         }
-    },500);
+    },205);
+
+    var loadId2 = setInterval(function() {
+        if(i2>=32){
+            clearInterval(loadId1);
+        }
+        else{
+            var grid = allGrids[i2];
+            var filter = new Filter();
+            filter.color = grid.color;
+            filter.keyword=  "book";
+            sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+            
+            i2++;
+        }
+    },205);
+
+    var loadId3 = setInterval(function() {
+        if(i3>=48){
+            clearInterval(loadId1);
+        }
+        else{
+            var grid = allGrids[i3];
+            var filter = new Filter();
+            filter.color = grid.color;
+            filter.keyword=  "book";
+            sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+            
+            i3++;
+        }
+    },205);
+
+
+    
 
 }
 
