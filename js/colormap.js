@@ -107,7 +107,10 @@ function drawMap(op, center) {
         var hslStr = Math.floor(hsl[0]) + "," + 
                      Math.floor(hsl[1]) + "," +
                      Math.floor(hsl[2]);
-        $(this).html("<img/>");
+        
+        var element = $(this);
+        element.html("<div class='image'></div>");
+
 
         // scale hsl, convert to hsv and scale back
         var hsv = hsl2hsv(hsl[0], hsl[1]/100, hsl[2]/100);
