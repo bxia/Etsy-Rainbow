@@ -10,10 +10,6 @@
     transition: transform 1s;
 }
 
-.grid img{
-    width: 75px;
-    height: 75px;
-}
 
 /*.rotated{
     -webkit-transform: rotateY(180deg);

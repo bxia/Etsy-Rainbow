@@ -255,6 +255,10 @@ input.checkbox:checked::before {
 	background-image: url("../img/pan-up-a.png");
 }
 
+#pan-up.disabled, #pan-up.disabled:hover, #pan-up.disabled:active{
+	background-image: url("../img/pan-up-d.png");
+}
+
 #pan-left{
 	background-image: url("../img/pan-left.png");
 }
@@ -263,6 +267,9 @@ input.checkbox:checked::before {
 }
 #pan-left:active{
 	background-image: url("../img/pan-left-a.png");
+}
+#pan-left.disabled, #pan-left.disabled:hover, #pan-left.disabled:active{
+	background-image: url("../img/pan-left-d.png");
 }
 
 #pan-center{
@@ -276,6 +283,9 @@ input.checkbox:checked::before {
 #pan-center:active{
 	background-image: url("../img/pan-center-a.png");
 }
+#pan-center.disabled, #pan-center.disabled:hover, #pan-center.disabled:active{
+	background-image: url("../img/pan-center-d.png");
+}
 
 #pan-right{
 	background-image: url("../img/pan-right.png");
@@ -285,6 +295,9 @@ input.checkbox:checked::before {
 }
 #pan-right:active{
 	background-image: url("../img/pan-right-a.png");
+}
+#pan-right.disabled, #pan-right.disabled:hover, #pan-right.disabled:active{
+	background-image: url("../img/pan-right-d.png");
 }
 
 #pan-down{
@@ -299,6 +312,71 @@ input.checkbox:checked::before {
 #pan-down:active{
 	background-image: url("../img/pan-down-a.png");
 }
+#pan-down.disabled, #pan-down.disabled:hover, #pan-down.disabled:active{
+	background-image: url("../img/pan-down-d.png");
+}
+
+
+#zoom{
+	width: 20px;
+	position: relative;
+	left: 20px;
+	margin-top: 20px;
+}
+
+#zoom-in:hover, #zoom-out:hover{cursor: pointer;}
+
+#zoom-in{
+	width: 20px;
+	height: 20px;
+	background-image: url("../img/zoom-in.png");
+}
+#zoom-in:hover{
+	background-image: url("../img/zoom-in-h.png");
+}
+#zoom-in:active{
+	background-image: url("../img/zoom-in-a.png");
+}
+#zoom-in.disabled, #zoom-in.disabled:hover, #zoom-in.disabled:active{
+	background-image: url("../img/zoom-in-d.png");
+}
+
+#zoom-lvl{
+	width: 20px;
+	height: 160px;
+}
+
+.zoom-lvl-1{
+	background-image: url("../img/zoom-lvl-base.png");
+}
+.zoom-lvl-2{
+	background-image: url("../img/zoom-lvl-2.png");
+}
+.zoom-lvl-3{
+	background-image: url("../img/zoom-lvl-3.png");
+}
+.zoom-lvl-4{
+	background-image: url("../img/zoom-lvl-4.png");
+}
+.zoom-lvl-5{
+	background-image: url("../img/zoom-lvl-5.png");
+}
+
+#zoom-out{
+	width: 20px;
+	height: 20px;
+	background-image: url("../img/zoom-out.png");
+}
+#zoom-out:hover{
+	background-image: url("../img/zoom-out-h.png");
+}
+#zoom-out:active{
+	background-image: url("../img/zoom-out-a.png");
+}
+#zoom-out.disabled, #zoom-out.disabled:hover, #zoom-out.disabled:active{
+	background-image: url("../img/zoom-out-d.png");
+}
+
 
 
 
