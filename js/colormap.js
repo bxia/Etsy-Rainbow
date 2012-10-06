@@ -16,7 +16,7 @@ var map = $("#grid_map");
 var grids = map.find(".grid");
 
 var lastCenter = undefined;
-var debug = true;
+var debug = false;
 
 /*
  * Get the hsl code depending on the grid we are on and our current zoom level.
@@ -92,6 +92,11 @@ function debugLog(msg) {
 }
 
 function drawMap() {
+    var l = ($('.popup-marker'));
+    for(var i=0;i<l.length;i++){
+        ($(l[i]).popover('hide'));  
+    }
+    prevID = undefined;
     $.each(grids, function(index, value) {
         // get hsl value of this grid
         var gridId = value.id;
@@ -102,7 +107,7 @@ function drawMap() {
         // $(this).html(hslStr);
         
         var element = $(this);
-
+        $(this).html("<div class='image'></div>");
         // scale hsl, convert to hsv and scale back
         var hsv = hsl2hsv(hsl[0], hsl[1]/100, hsl[2]/100);
         hsv = [hsv[0], hsv[1]*100, hsv[2]*100];
@@ -129,7 +134,8 @@ function zoom(dir, center) {
     var xZoomDeltaRight = xZoomDeltaLeft;
     var yZoomDeltaUp = yDelta / 2;
     var yZoomDeltaDown = yZoomDeltaUp;
-    
+   
+
     if (arguments.length === 2) {
         var hsv = getHsl(center, frame);
         // case 1: left side not enough room
@@ -255,11 +261,12 @@ function start() {
 
     reset();
 
-    var inButton = document.getElementById("inButton");
+    var inButton = document.getElementById("zoom-in");
     inButton.onclick = function() {
+
         zoom("in");
     }
-    var outButton = document.getElementById("outButton");
+    var outButton = document.getElementById("zoom-out");
     outButton.onclick = function() {
         if (lastCenter !== undefined) {
             zoom("out", lastCenter);
@@ -267,16 +274,16 @@ function start() {
             zoom("out");
         }
     }
-    var resetButton = document.getElementById("resetButton");
+    var resetButton = document.getElementById("pan-center");
     resetButton.onclick = function() {
         reset();
     }
 
-    $(document).ready(function() {
-        $(window).scroll(function() {
-            alert($(window).scrollTop());
-        });
-    });
+    // $(document).ready(function() {
+    //     $(window).scroll(function() {
+    //         alert($(window).scrollTop());
+    //     });
+    // });
 
     // $(document).ready(function() {
     //     $(".grid").smoothDivScroll(function(event) {
@@ -287,22 +294,22 @@ function start() {
     //     });
     // });
 
-    var upButton = document.getElementById("upButton");
+    var upButton = document.getElementById("pan-up");
     upButton.onclick = function() {
         move("up");
     }
 
-    var downButton = document.getElementById("downButton");
+    var downButton = document.getElementById("pan-down");
     downButton.onclick = function() {
         move("down");
     }
 
-    var leftButton = document.getElementById("leftButton");
+    var leftButton = document.getElementById("pan-left");
     leftButton.onclick = function() {
         move("left");
     }
 
-    var rightButton = document.getElementById("rightButton");
+    var rightButton = document.getElementById("pan-right");
     rightButton.onclick = function() {
         move("right");
     }

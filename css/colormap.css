@@ -15,17 +15,15 @@
 .gridAfter{
     opacity: 1;
     -moz-opacity: 1;
-        -webkit-transition: all 1s ease-in-out 0s; 
-    -moz-transition: all 1s ease-in-out 0s;
-    -o-transition: all 1s ease-in-out 0s;
-    transition: all 1s ease-in-out 0s;
+        -webkit-transition: opacity 1s ease-in-out 0s; 
+    -moz-transition: opacity 1s ease-in-out 0s;
+    -o-transition: opacity 1s ease-in-out 0s;
+    transition: opacity 1s ease-in-out 0s;
 }
 
 .color-row{
 	height: 100px;
 }
-
-
 
 
 .grid .image{
@@ -36,5 +34,14 @@
     border: 9px solid white;
     position: relative;
     margin: auto;
-    top: 2px;
+    top: 3px;
+}
+
+.grid:hover{
+    cursor: pointer;
+}
+
+.grid:hover .image{
+    border: 5px solid white;
+    margin-top: 4px;
 }
