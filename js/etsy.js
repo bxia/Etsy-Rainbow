@@ -16,7 +16,7 @@ var color_accuracy = 20;
 var searchLimit = 30;
 var resultCache = new Object();
 var storedImages = new Array();
-
+var clicked= false;
 //when_made
 var vintages = [
     "1980s", "1970s", "1960s", "1950s", "1940s", "1930s", "1920s", "1910s", "1900s", "1800s", "1700s", "before_1700"
@@ -252,9 +252,28 @@ function updateOneGrid(data,request){
     }
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
-        grid.el.html("<div class='image' style="+ style + "></div>");
-    }
+        var content = "popup content";
 
+        // <a  rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
+        // <button class="btn">Toggle Popover</button>
+        // </a>
+        // grid.el.html("<a href='#' rel='popover' data-content='bal' class='popup-marker' style='display: inline-block; width: 100px; height: 100px;'><div class='image' data-content="+content+" style="+ style + "></div></a>");
+        //grid.el.html("<a rel='popover' data-content='blach' class='open'> Toggle</a>");
+        grid.el.html("<div class='image popup-marker' data-content='<a href=http://www.google.com>Google </a>' style="+ style + " id='a"+ grid.id+ "'></div>");
+
+    $('#a'+grid.id).popover({
+    html: true,
+    trigger: 'manual'}).click(function(e) { 
+        var l = ($('.popup-marker'));
+        for(var i=0;i<l.length;i++){
+            if( $(l[i])[0].id === 'a'+grid.id) continue;
+            ($(l[i]).popover('hide'));  
+        }
+        $(this).popover('show');
+        clicked=true;
+        e.preventDefault();
+    });
+    }
 }   
 
 function run () {
@@ -326,81 +345,93 @@ function run () {
         }
     },205);
 
-    var loadId2 = setInterval(function() {
-        if(i2>=16){
-            clearInterval(loadId2);
-        }
-        else{
-            var grid = allGrids[i2];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,1),updateOneGrid);
+    // var loadId2 = setInterval(function() {
+    //     if(i2>=16){
+    //         clearInterval(loadId2);
+    //     }
+    //     else{
+    //         var grid = allGrids[i2];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,1),updateOneGrid);
             
-            i2++;
-        }
-    },205);
+    //         i2++;
+    //     }
+    // },205);
 
-    var loadId3 = setInterval(function() {
-        if(i3>=24){
-            clearInterval(loadId3);
-        }
-        else{
-            var grid = allGrids[i3];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+    // var loadId3 = setInterval(function() {
+    //     if(i3>=24){
+    //         clearInterval(loadId3);
+    //     }
+    //     else{
+    //         var grid = allGrids[i3];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,2),updateOneGrid);
             
-            i3++;
-        }
-    },205);
+    //         i3++;
+    //     }
+    // },205);
 
-    var loadId4 = setInterval(function() {
-        if(i4>=32){
-            clearInterval(loadId4);
-        }
-        else{
-            var grid = allGrids[i4];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+    // var loadId4 = setInterval(function() {
+    //     if(i4>=32){
+    //         clearInterval(loadId4);
+    //     }
+    //     else{
+    //         var grid = allGrids[i4];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,3),updateOneGrid);
             
-            i4++;
-        }
-    },205);
+    //         i4++;
+    //     }
+    // },205);
 
-    var loadId5 = setInterval(function() {
-        if(i5>=40){
-            clearInterval(loadId5);
-        }
-        else{
-            var grid = allGrids[i5];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,4),updateOneGrid);
+    // var loadId5 = setInterval(function() {
+    //     if(i5>=40){
+    //         clearInterval(loadId5);
+    //     }
+    //     else{
+    //         var grid = allGrids[i5];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,4),updateOneGrid);
             
-            i5++;
-        }
-    },205);
+    //         i5++;
+    //     }
+    // },205);
 
-    var loadId6 = setInterval(function() {
-        if(i6>=48){
-            clearInterval(loadId6);
-        }
-        else{
-            var grid = allGrids[i6];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,5),updateOneGrid);
+    // var loadId6 = setInterval(function() {
+    //     if(i6>=48){
+    //         clearInterval(loadId6);
+    //     }
+    //     else{
+    //         var grid = allGrids[i6];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,5),updateOneGrid);
             
-            i6++;
-        }
-    },205);
+    //         i6++;
+    //     }
+    // },205);
 
+    $(document).click(function(e) {
+    if(clicked){ 
+        clicked=false;
+        return;
+    }
+    var l = ($('.popup-marker'));
+    for(var i=0;i<l.length;i++){
+       ($(l[i]).popover('hide'));  
+    }
+    clicked = false;
+
+    });
 
     
 

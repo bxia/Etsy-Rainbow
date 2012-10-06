@@ -32,12 +32,17 @@
         </div>
     </div>
 
-    <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="popover">
+    <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
         <button class="btn">Toggle Popover</button>
+    </a>
+
+      <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="close">
+        <button class="btn">close</button>
     </a>
     <script>
         $(function ()  
-            { $("#popover").popover();  
+            { $("#open").popover(); 
+            	$("#close").popover('destroy'); 
         }); 
     </script>
 
