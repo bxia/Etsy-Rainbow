@@ -133,26 +133,35 @@ label.checkbox{
 
 /* -------- search box style ---------- */
 
+form.search input, form.search input:focus, form.search button, 
+form.search button:hover, form.search button:active, 
+input.radio, input.radio:hover, input.radio:active, input.radio:checked,
+input.checkbox, input.checkbox:hover, input.checkbox:active,
+input.checkbox:checked, input.checkbox:checked::before{
+	background: url('../img/form-sprite.png') no-repeat;
+}
+
+
 form.search input{
-	background: url('../img/search-box.png') no-repeat;
+	background-position: 0px 0px;
 	width: 144px;
 	border: 1px solid transparent;
 }
 form.search input:focus{
-	background: url('../img/search-box-focus.png') no-repeat;
+	background-position: 0px -40px;
 }
 
 form.search button{
-	background: url('../img/search-button.png') no-repeat;
+	background-image: url('../img/search-button.png');
 	width: 38px;
 	height: 29px;
 	border: 1px solid transparent;
 }
 form.search button:hover{
-	background: url('../img/search-button-h.png') no-repeat;
+	background-image: url('../img/search-button-h.png');
 }
 form.search button:active{
-	background: url('../img/search-button-a.png') no-repeat;
+	background-image: url('../img/search-button-a.png');
 	width: 38px;
 	border: 1px solid transparent;
 }
@@ -173,19 +182,17 @@ input.radio, input.checkbox{
 }
 
 
-
-
 input.radio {
-	background: transparent url('../img/radio.png'); 
+	background-position: 0px -120px;
 }
 input.radio:hover{
-	background: transparent url('../img/radio-h.png');
+	background-position: -20px -120px;
 }
 input.radio:active{
-	background: transparent url('../img/radio-a.png');
+	background-position: -40px -120px;
 }
 input.radio:checked{
-	background: transparent url('../img/radio-checked.png');
+	background-position: -60px -120px;
 }
 input.radio:checked::before {
 	-webkit-appearance: none; 
@@ -205,22 +212,22 @@ input.radio:checked:active::before, input.checkbox:checked:active::before {}
 /* -------- checkbox styling ---------- */
 
 input.checkbox {
-	background: transparent url('../img/checkbox.png'); 
+	background-position: -100px -120px ;
 }
 input.checkbox:hover{
-	background: transparent url('../img/checkbox-h.png');
+	background-position: -120px -120px;
 }
 input.checkbox:active{
-	background: transparent url('../img/checkbox-a.png');
+	background-position: -140px -120px;
 }
 input.checkbox:checked{
-	background: transparent url('../img/checkbox-checked.png');
+	background-position: -160px -120px;
 }
 input.checkbox:checked::before {
 	-webkit-appearance: none; 
 	content: ':)'; 
 	text-indent: -9999px; 
-	background: url('../img/checkbox-tick.png') bottom center no-repeat; 
+	background-position: -180px -120px;
 	width: 18px; 
 	height: 18px; 
 	top: 0px; 
@@ -233,6 +240,26 @@ input.checkbox:checked::before {
 
 
 /* --------------- CONTROLS ------------ */
+
+#pan-up, #pan-up:hover, #pan-up:active, #pan-up.disabled, 
+#pan-up.disabled:hover, #pan-up.disabled:active,
+#pan-left, #pan-left:hover, #pan-left:active, #pan-left.disabled, 
+#pan-left.disabled:hover, #pan-left.disabled:active,
+#pan-center, #pan-center:hover, #pan-center:active, #pan-center.disabled, 
+#pan-center.disabled:hover, #pan-center.disabled:active,
+#pan-right, #pan-right:hover, #pan-right:active, #pan-right.disabled, 
+#pan-right.disabled:hover, #pan-right.disabled:active,
+#pan-down, #pan-down:hover, #pan-down:active, #pan-down.disabled, 
+#pan-down.disabled:hover, #pan-down.disabled:active,
+#zoom-in, #zoom-in:hover, #zoom-in:active, #zoom-in.disabled, 
+#zoom-in.disabled:hover, #zoom-in.disabled:active,
+#zoom-out, #zoom-out:hover, #zoom-out:active, #zoom-out.disabled, 
+#zoom-out.disabled:hover, #zoom-out.disabled:active,
+.zoom-lvl-1, .zoom-lvl-2, .zoom-lvl-3, .zoom-lvl-4, .zoom-lvl-5{
+	background-image: url("../img/control-sprite.png");
+}
+
+
 #pan span{
 	display: inline-block;
 	height: 20px;
@@ -245,75 +272,75 @@ input.checkbox:checked::before {
 #pan-up{
 	position: relative;
 	left: 20px;
-	background-image: url("../img/pan-up.png");
+	background-position: 0px 0px;
 	margin-bottom: -5px;
 }
 #pan-up:hover{
-	background-image: url("../img/pan-up-h.png");
+	background-position: -20px 0px;
 }
 #pan-up:active{
-	background-image: url("../img/pan-up-a.png");
+	background-position: -40px 0px;
 }
 
 #pan-up.disabled, #pan-up.disabled:hover, #pan-up.disabled:active{
-	background-image: url("../img/pan-up-d.png");
+	background-position: -60px 0px;
 }
 
 #pan-left{
-	background-image: url("../img/pan-left.png");
+	background-position: 0px -20px;
 }
 #pan-left:hover{
-	background-image: url("../img/pan-left-h.png");
+	background-position: -20px -20px;
 }
 #pan-left:active{
-	background-image: url("../img/pan-left-a.png");
+	background-position: -40px -20px;
 }
 #pan-left.disabled, #pan-left.disabled:hover, #pan-left.disabled:active{
-	background-image: url("../img/pan-left-d.png");
+	background-position: -60px -20px;
 }
 
 #pan-center{
-	background-image: url("../img/pan-center.png");
+	background-position: 0px -40px;
 	margin-left: -4px;
 	margin-right: -4px;
 }
 #pan-center:hover{
-	background-image: url("../img/pan-center-h.png");
+	background-position: -20px -40px;
 }
 #pan-center:active{
-	background-image: url("../img/pan-center-a.png");
+	background-position: -40px -40px;
 }
 #pan-center.disabled, #pan-center.disabled:hover, #pan-center.disabled:active{
-	background-image: url("../img/pan-center-d.png");
+	background-position: -60px -40px;
 }
 
 #pan-right{
-	background-image: url("../img/pan-right.png");
+	background-position: 0px -60px;
 }
 #pan-right:hover{
-	background-image: url("../img/pan-right-h.png");
+	background-position: -20px -60px;
 }
 #pan-right:active{
-	background-image: url("../img/pan-right-a.png");
+	background-position: -40px -60px;
 }
 #pan-right.disabled, #pan-right.disabled:hover, #pan-right.disabled:active{
-	background-image: url("../img/pan-right-d.png");
+	background-position: -60px -60px;
 }
 
 #pan-down{
 	position: relative;
 	left: 20px;
-	background-image: url("../img/pan-down.png");
+	background-position: 0px -80px;
 	margin-top: -5px;
 }
 #pan-down:hover{
-	background-image: url("../img/pan-down-h.png");
+	background-position: -20px -80px;
 }
 #pan-down:active{
-	background-image: url("../img/pan-down-a.png");
+	background-position: -40px -80px;
 }
 #pan-down.disabled, #pan-down.disabled:hover, #pan-down.disabled:active{
-	background-image: url("../img/pan-down-d.png");
+	background-position: -60px -80px;
 }
 
 
@@ -329,16 +356,16 @@ input.checkbox:checked::before {
 #zoom-in{
 	width: 20px;
 	height: 20px;
-	background-image: url("../img/zoom-in.png");
+	background-position: 0px -100px;
 }
 #zoom-in:hover{
-	background-image: url("../img/zoom-in-h.png");
+	background-position: -20px -100px;
 }
 #zoom-in:active{
-	background-image: url("../img/zoom-in-a.png");
+	background-position: -40px -100px;
 }
 #zoom-in.disabled, #zoom-in.disabled:hover, #zoom-in.disabled:active{
-	background-image: url("../img/zoom-in-d.png");
+	background-position: -60px -100px;
 }
 
 #zoom-lvl{
@@ -347,34 +374,34 @@ input.checkbox:checked::before {
 }
 
 .zoom-lvl-1{
-	background-image: url("../img/zoom-lvl-base.png");
+	background-position: 0px -140px;
 }
 .zoom-lvl-2{
-	background-image: url("../img/zoom-lvl-2.png");
+	background-position: -20px -140px;
 }
 .zoom-lvl-3{
-	background-image: url("../img/zoom-lvl-3.png");
+	background-position: -40px -140px;
 }
 .zoom-lvl-4{
-	background-image: url("../img/zoom-lvl-4.png");
+	background-position: -60px -140px;
 }
 .zoom-lvl-5{
-	background-image: url("../img/zoom-lvl-5.png");
+	background-position: -80px -140px;
 }
 
 #zoom-out{
 	width: 20px;
 	height: 20px;
-	background-image: url("../img/zoom-out.png");
+	background-position: 0px -120px;
 }
 #zoom-out:hover{
-	background-image: url("../img/zoom-out-h.png");
+	background-position: -20px -120px;
 }
 #zoom-out:active{
-	background-image: url("../img/zoom-out-a.png");
+	background-position: -40px -120px;
 }
 #zoom-out.disabled, #zoom-out.disabled:hover, #zoom-out.disabled:active{
-	background-image: url("../img/zoom-out-d.png");
+	background-position: -60px -120px;
 }
 
 
