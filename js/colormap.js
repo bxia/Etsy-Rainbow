@@ -8,11 +8,8 @@ var startFrame = [
         [359,  100, 10],
         [20, 100, 10]];
 
-var frame = [
-        [359,  100, 90],
-        [20, 100, 90],
-        [359,  100, 10],
-        [20, 100, 10]];
+var frame = Array(4);
+     
 
 var zoomLevel = 0;
 var map = $("#grid_map");
@@ -195,11 +192,12 @@ function zoom(dir, center) {
 }
 
 function start() {
-    drawMap();
-
     frame[0] = $.extend(true, [], startFrame[0]);
     frame[1] = $.extend(true, [], startFrame[1]);
     frame[2] = $.extend(true, [], startFrame[2]);
+
+    drawMap();
+
 
     var inButton = document.getElementById("inButton");
     inButton.onclick = function() {

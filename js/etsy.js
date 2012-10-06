@@ -140,7 +140,7 @@ function cache(obj,result){
 }
 
 /*
-* Read the result for the given obj from the cache
+* Read the result for the given filter from the cache
 */
 function readFromCache (obj) {
     if(obj === undefined) return undefined;
