@@ -10,3 +10,6 @@ Ruoyu Li:
     Rainbow
     KEYSTRING2ufyxjd5wccvgcm0yb61jp7b
     SHARED SECRETui4uutk6y7
+
+KEYSTRING   hr7dbzisuo6y56soguanj071
+SHARED SECRET   uags51xnu6

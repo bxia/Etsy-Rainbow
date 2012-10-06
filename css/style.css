@@ -71,8 +71,7 @@ body{
 	height: 600px;
 }
 #controls{
-	background: #ddd;
-	height: 600px;
+	padding-top: 20px;
 }
 
 
@@ -228,6 +227,77 @@ input.checkbox:checked::before {
 	left: 0px; 
 	position: absolute; 
 	display: block;
+}
+
+
+
+
+/* --------------- CONTROLS ------------ */
+#pan span{
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+}
+#pan span:hover{
+	cursor: pointer;
+}
+
+#pan-up{
+	position: relative;
+	left: 20px;
+	background-image: url("../img/pan-up.png");
+	margin-bottom: -5px;
+}
+#pan-up:hover{
+	background-image: url("../img/pan-up-h.png");
+}
+#pan-up:active{
+	background-image: url("../img/pan-up-a.png");
+}
+
+#pan-left{
+	background-image: url("../img/pan-left.png");
+}
+#pan-left:hover{
+	background-image: url("../img/pan-left-h.png");
+}
+#pan-left:active{
+	background-image: url("../img/pan-left-a.png");
+}
+
+#pan-center{
+	background-image: url("../img/pan-center.png");
+	margin-left: -4px;
+	margin-right: -4px;
+}
+#pan-center:hover{
+	background-image: url("../img/pan-center-h.png");
+}
+#pan-center:active{
+	background-image: url("../img/pan-center-a.png");
+}
+
+#pan-right{
+	background-image: url("../img/pan-right.png");
+}
+#pan-right:hover{
+	background-image: url("../img/pan-right-h.png");
+}
+#pan-right:active{
+	background-image: url("../img/pan-right-a.png");
+}
+
+#pan-down{
+	position: relative;
+	left: 20px;
+	background-image: url("../img/pan-down.png");
+	margin-top: -5px;
+}
+#pan-down:hover{
+	background-image: url("../img/pan-down-h.png");
+}
+#pan-down:active{
+	background-image: url("../img/pan-down-a.png");
 }
 
 

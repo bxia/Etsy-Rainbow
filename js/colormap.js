@@ -110,7 +110,7 @@ function drawMap(op, center) {
         var hslStr = Math.floor(hsl[0]) + "," + 
                      Math.floor(hsl[1]) + "," +
                      Math.floor(hsl[2]);
-        $(this).html(hslStr);
+        $(this).html("<img/>");
 
         // scale hsl, convert to hsv and scale back
         var hsv = hsl2hsv(hsl[0], hsl[1]/100, hsl[2]/100);
@@ -124,7 +124,7 @@ function drawMap(op, center) {
                      Math.floor(rgb[0]) + ", " + 
                      Math.floor(rgb[1]) + ", " + 
                      Math.floor(rgb[2]) + ")"
-        $(this).css("background-color", rgbStr);
+        //$(this).css("background-color", rgbStr);
     });
 }
 
