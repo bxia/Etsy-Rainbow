@@ -208,18 +208,18 @@ bottom:5px;
     -moz-opacity: 0.00;
     opacity: 0.00;
 
-    -webkit-transition: all 1s ease-in-out 0s; 
-    -moz-transition: all 1s ease-in-out 0s;
-    -o-transition: all 1s ease-in-out 0s;
-    transition: all 1s ease-in-out 0s;
+    -webkit-transition: opacity 1s ease-in-out 0s; 
+    -moz-transition: opacity 1s ease-in-out 0s;
+    -o-transition: opacity 1s ease-in-out 0s;
+    transition: opacity 1s ease-in-out 0s;
 }
 
 .after{
     -moz-opacity: 1.00;
     opacity: 1.00;
-    -webkit-transition: all 1s ease-in-out 0s; 
-    -moz-transition: all 1s ease-in-out 0s;
-    -o-transition: all 1s ease-in-out 0s;
-    transition: all 1s ease-in-out 0s;    
+    -webkit-transition: opacity 1s ease-in-out 0s; 
+    -moz-transition: opacity 1s ease-in-out 0s;
+    -o-transition: opacity 1s ease-in-out 0s;
+    transition: opacity 1s ease-in-out 0s;    
 
 }

@@ -17,6 +17,7 @@ var searchLimit = 30;
 var resultCache = new Object();
 var storedImages = new Array();
 var clicked= false;
+var prevID = undefined;
 //when_made
 var vintages = [
     "1980s", "1970s", "1960s", "1950s", "1940s", "1930s", "1920s", "1910s", "1900s", "1800s", "1700s", "before_1700"
@@ -169,7 +170,7 @@ function findMostPopular (data,filter) {
         var when_made = o.when_made;
         var who_made = o.who_made;
         var num_favorers = o.num_favorers;
-        var category = o.category_path[0].toLowerCase();
+        var category = o.category_path[0];
         var price = o.price;
         var type = filter.filterType;
         var cat  = filter.category;
@@ -263,26 +264,29 @@ function updateOneGrid(data,request){
         if(description.length >= 110)
             description = description.substring(0,110) + "...";
 
-        console.log(result);
-
         var content = "<div class=pull-left><div class=shop>from <a href="+shopURL+" target=_blank>"+shopName+"</a></div><div class=description>"+description+"</div></div><div class=pull-right><div class=info><div class=price>$"+price+"</div><div class=link><a href="+url+" target=_blank><button class=btn>more</button></a></div></div></div>";
         grid.el.html("<div class='image popup-marker before' data-placement='bottom' data-content='"+content+"' data-original-title='"+title+"'style="+ style + " id='a"+ grid.id+ "'></div>");
-
-        //$(grid.el).children()[0].addClass("after");
-        console.log($(grid.el).children()[0].className = "image popup-marker before after");
+        $(grid.el).children()[0].className = "image popup-marker before after";
         $(grid.el).addClass("gridAfter");
-    $('#a'+grid.id).popover({
-    html: true,
-    trigger: 'manual'}).click(function(e) { 
-        var l = ($('.popup-marker'));
-        for(var i=0;i<l.length;i++){
-            if( $(l[i])[0].id === 'a'+grid.id) continue;
-            ($(l[i]).popover('hide'));  
-        }
-        $(this).popover('show');
-        clicked=true;
-        e.preventDefault();
-    });
+
+        $('#a'+grid.id).popover({
+        html: true,
+        trigger: 'manual'}).click(function(e) { 
+            if(prevID !== undefined && prevID === grid.id){
+                $('#a'+grid.id).popover('hide');
+                prevID = undefined;
+                return;
+            }
+            prevID = grid.id;
+            var l = ($('.popup-marker'));
+            for(var i=0;i<l.length;i++){
+                if( $(l[i])[0].id === 'a'+grid.id) continue;
+                ($(l[i]).popover('hide'));  
+            }
+            $(this).popover('show');
+            clicked=true;
+            e.preventDefault();
+        });
     }
 }   
 
@@ -370,78 +374,78 @@ function run () {
         }
     },205);
 
-    var loadId3 = setInterval(function() {
-        if(i3>=24){
-            clearInterval(loadId3);
-        }
-        else{
-            var grid = allGrids[i3];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,2),updateOneGrid);
+    // var loadId3 = setInterval(function() {
+    //     if(i3>=24){
+    //         clearInterval(loadId3);
+    //     }
+    //     else{
+    //         var grid = allGrids[i3];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,2),updateOneGrid);
             
-            i3++;
-        }
-    },205);
+    //         i3++;
+    //     }
+    // },205);
 
-    var loadId4 = setInterval(function() {
-        if(i4>=32){
-            clearInterval(loadId4);
-        }
-        else{
-            var grid = allGrids[i4];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,3),updateOneGrid);
+    // var loadId4 = setInterval(function() {
+    //     if(i4>=32){
+    //         clearInterval(loadId4);
+    //     }
+    //     else{
+    //         var grid = allGrids[i4];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,3),updateOneGrid);
             
-            i4++;
-        }
-    },205);
+    //         i4++;
+    //     }
+    // },205);
 
-    var loadId5 = setInterval(function() {
-        if(i5>=40){
-            clearInterval(loadId5);
-        }
-        else{
-            var grid = allGrids[i5];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,4),updateOneGrid);
+    // var loadId5 = setInterval(function() {
+    //     if(i5>=40){
+    //         clearInterval(loadId5);
+    //     }
+    //     else{
+    //         var grid = allGrids[i5];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,4),updateOneGrid);
             
-            i5++;
-        }
-    },205);
+    //         i5++;
+    //     }
+    // },205);
 
-    var loadId6 = setInterval(function() {
-        if(i6>=48){
-            clearInterval(loadId6);
-        }
-        else{
-            var grid = allGrids[i6];
-            var filter = new Filter();
-            filter.color = grid.color;
-            filter.keyword=  "book";
-            sendRequest(prepareURL(filter,grid,5),updateOneGrid);
+    // var loadId6 = setInterval(function() {
+    //     if(i6>=48){
+    //         clearInterval(loadId6);
+    //     }
+    //     else{
+    //         var grid = allGrids[i6];
+    //         var filter = new Filter();
+    //         filter.color = grid.color;
+    //         filter.keyword=  "book";
+    //         sendRequest(prepareURL(filter,grid,5),updateOneGrid);
             
-            i6++;
-        }
-    },205);
+    //         i6++;
+    //     }
+    // },205);
 
-    $(document).click(function(e) {
-    if(clicked){ 
-        clicked=false;
-        return;
-    }
-    var l = ($('.popup-marker'));
-    for(var i=0;i<l.length;i++){
-       ($(l[i]).popover('hide'));  
-    }
-    clicked = false;
+    // $(document).click(function(e) {
+    // if(clicked){ 
+    //     clicked=false;
+    //     return;
+    // }
+    // var l = ($('.popup-marker'));
+    // for(var i=0;i<l.length;i++){
+    //    ($(l[i]).popover('hide'));  
+    // }
+    // clicked = false;
 
-    });
+    // });
 
     
 
