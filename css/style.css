@@ -406,4 +406,42 @@ input.checkbox:checked::before {
 
 
 
+/* --------------- COLOR MAP ------------ */
+
+.popover{
+	width: 250px;
+}
+
+.popover-content .pull-left{
+	width: 150px;
+	font-size: 12px;
+	padding-bottom:10px;
+}
+.popover-content .pull-right{
+	width: 60px;
+}
+
+.popover-content .price{
+	text-align: center;
+	font-size: 14px;
+	background-color: #76ce3b;
+	color: #fff;
+	padding: 4px;
+	margin-bottom: 15px;
+
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.popover-content .shop{
+	color: #999;
+}
+
+.popover-content .link button{
+	width: 60px;
+	padding: ;
+}
+
+
+
 

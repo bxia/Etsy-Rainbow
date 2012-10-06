@@ -252,18 +252,28 @@ function updateOneGrid(data,request){
     }
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
-        var content = "popup content";
         var price = result.price;
         var description = result.description;
         var title = result.title;
+        if(title.length >= 30)
+            title = title.substring(0,27) + "...";
         var url = result.url;
+        var shopURL = result.Shop.url;
+        var shopName = result.Shop.shop_name;
+        if(description.length >= 110)
+            description = description.substring(0,110) + "...";
+
         console.log(result);
+
+        var content = "<div class=pull-left><div class=shop>from <a href="+shopURL+" target=_blank>"+shopName+"</a></div><div class=description>"+description+"</div></div><div class=pull-right><div class=info><div class=price>$"+price+"</div><div class=link><a href="+url+" target=_blank><button class=btn>more</button></a></div></div></div>";
+
+        // console.log(result);
         // <a  rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
         // <button class="btn">Toggle Popover</button>
         // </a>
         // grid.el.html("<a href='#' rel='popover' data-content='bal' class='popup-marker' style='display: inline-block; width: 100px; height: 100px;'><div class='image' data-content="+content+" style="+ style + "></div></a>");
         //grid.el.html("<a rel='popover' data-content='blach' class='open'> Toggle</a>");
-        grid.el.html("<div class='image popup-marker' data-content='<a href=http://www.google.com>Google </a>' style="+ style + " id='a"+ grid.id+ "'></div>");
+        grid.el.html("<div class='image popup-marker' data-placement='bottom' data-content='"+content+"' data-original-title='"+title+"'style="+ style + " id='a"+ grid.id+ "'></div>");
 
     $('#a'+grid.id).popover({
     html: true,
