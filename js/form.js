@@ -113,10 +113,24 @@ function update(grid){
 
 function disableAll(){
     $("input").attr("disabled", "disabled");
+    $("#pan-up").attr("class", "disabled");
+    $("#pan-down").attr("class", "disabled");
+    $("#pan-left").attr("class", "disabled");
+    $("#pan-right").attr("class", "disabled");
+    $("#pan-center").attr("class", "disabled");
+    $("#zoom-in").attr("class", "disabled");
+    $("#zoom-out").attr("class", "disabled");
 }
 
 function enableAll(){
     $("input").removeAttr("disabled");
+    $("#pan-up").attr("class", "enabled");
+    $("#pan-down").attr("class", "enabled");
+    $("#pan-left").attr("class", "enabled");
+    $("#pan-right").attr("class", "enabled");
+    $("#pan-center").attr("class", "enabled");
+    $("#zoom-in").attr("class", "enabled");
+    $("#zoom-out").attr("class", "enabled");
 }
 
 
