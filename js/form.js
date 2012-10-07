@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////
+//                        15237 HW4 Unit Project                      //
+// Group members: Zi Wang (ziw), Bingying Xia(bxia), Ruoyu Li(ruoyul) //
+////////////////////////////////////////////////////////////////////////
+
+
 window.onload = function(){
 
     // send search query
@@ -7,7 +13,7 @@ window.onload = function(){
         // check if search is empty
         if(keyword !== undefined
             && keyword.trim().length >0){
-            update();
+            //update();
         }
     })
 
@@ -21,13 +27,13 @@ window.onload = function(){
         else {
             $("#type-all").attr("checked", false);
         }
-        update();
+        //update();
     });
     $("#type-all").change(function(){
         $("form.type input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        update();
+        //update();
     });
 
 
@@ -38,16 +44,16 @@ window.onload = function(){
         $("#price-slider").slideUp("fast");
         //$('form.price').animate({ marginTop: '20px'}, 200);
         $("form.price").css({"margin-bottom": "20px"});
-        update();
+        //update();
     });
     $("#price-range").change(function(){     // show slider if range is chosen, adjust margin
          $("#price-slider").slideDown("fast");
          $("form.price").css({"margin-bottom": "70px"});
-         update();
+         //update();
     });
 
     $(".jslider-pointer").click(function(){
-        update();
+        //update();
     });
 
 
@@ -61,56 +67,16 @@ window.onload = function(){
         else {
             $("#category-all").attr("checked", false);
         }
-        update();
+        //update();
     });
     $("#category-all").change(function(){
         $("form.categories input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        update();
+        //update();
     });
 
 }
-
-
-function update(grid){
-    var filter = new Filter();
-
-    // update search keyword
-    filter.keyword = document.getElementById('keyword').value;
-
-    // update type
-    if ($("#type-all").attr("checked") === "checked"){
-        filter.filterType = "all";
-    }
-    else {
-        $("form.type input.checkbox:checked").each(function(){
-            filter.filterType += $(this).attr("value");
-        });
-    }
-
-    // update price range
-    if ($("#price-range").attr("checked") === "checked"){
-        var priceRange = $("#price").attr("value");
-        var delimLoc = priceRange.indexOf(";");
-        filter.minPrice = priceRange.substring(0,delimLoc);
-        filter.maxPrice = priceRange.substring(delimLoc+1,priceRange.length);
-    }
-
-    // update categories
-    if ($("#category-all").attr("checked") === "checked"){
-        filter.category = "all";
-    }
-    else {
-        $("form.categories input.checkbox:checked").each(function(){
-            filter.category += $(this).attr("value");
-        });
-    }
-
-    console.log(filter);
-   
-}
-
 
 
 

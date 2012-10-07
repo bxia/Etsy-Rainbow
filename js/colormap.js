@@ -134,7 +134,6 @@ function zoom(dir, center) {
     var xZoomDeltaRight = xZoomDeltaLeft;
     var yZoomDeltaUp = yDelta / 2;
     var yZoomDeltaDown = yZoomDeltaUp;
-   
 
     if (arguments.length === 2) {
         var hsv = getHsl(center, frame);
@@ -199,6 +198,18 @@ function zoom(dir, center) {
     // change lower right
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
+
+    $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
+    transition(); 
+    $("#loader-wrapper").css("display", "block"); 
+
+    setTimeout(function() {
+        $("#myCanvas").fadeOut("slow");
+    }, 1000);
+
+    setTimeout(function() {
+        $("#myCanvas").remove();
+    }, 1500);
 
     drawMap();
 }
