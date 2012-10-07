@@ -4,11 +4,14 @@ Team Members: Ruoyu Li, Zi Wang, Bingying Xia
 
 Project: Etsy Rainbow
 
-This tool allows users to browse for Etsy products based on a color map.
+This tool allows users to browse Etsy products based on a color map.
 Each product shown on the color map is the hottest Etsy product in that 
 color. 
-(Actually, the hottest Etsy product out of the first 30 results returned 
-from Etsy as of now, because the Etsy API is super duper slow.)
+(Actually, it's the hottest Etsy product out of the first 30 results 
+returned from Etsy, because as you will learn from our incessant 
+"please wait" messages, the Etsy servers are SUPER DUPER slow, even 
+though we are using 6 API keys and a cache system.)
+
 Users can also narrow down the search a bit using filters like type, 
 price and categories. Ultimately, it's a tool for creating a visually-
 engaging casual browsing experience, and is not meant to be used for 
@@ -24,8 +27,9 @@ of the HSL color space.
 
   
 * Sometimes while trying to retrieve data from Etsy, we get GET errors in
-  the console for inexplicable reasons. It would work if you try with a
-  different computer or wait a while.
+  the console for inexplicable reasons. It would magically work if you try 
+  with a different browser or computer, wait a while, or restart your 
+  computer. If all else fails, try recompiling your kernel.
 
 
 
