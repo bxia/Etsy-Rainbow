@@ -111,8 +111,13 @@ function update(grid){
    
 }
 
+function disableAll(){
+    $("input").attr("disabled", "disabled");
+}
 
-
+function enableAll(){
+    $("input").removeAttr("disabled");
+}
 
 
 
