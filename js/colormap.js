@@ -199,9 +199,18 @@ function zoom(dir, center) {
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
 
-    // $("#products").append("<canvas id="myCanvas" width="800" height="600"></canvas>");
-    
-     
+    $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
+    transition(); 
+    $("#loader-wrapper").css("display", "block"); 
+
+    setTimeout(function() {
+        $("#myCanvas").fadeOut("slow");
+    }, 1000);
+
+    setTimeout(function() {
+        $("#myCanvas").remove();
+    }, 1500);
+
     drawMap();
 }
 

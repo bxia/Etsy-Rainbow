@@ -9,9 +9,9 @@ var COLS = CANVAS_WIDTH/GRID_WIDTH;
 var GRID_ALPHA = 0.05;
 var DRAW_TIMES = 1/GRID_ALPHA;
 
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-
+var canvas;
+var ctx;
+var colorGrid;
 
 /* Grid object */
 
@@ -36,7 +36,7 @@ function fadeIn(){
 		else{
 			for( var row = 0; row < ROWS; row++){
 				for(var col = 0; col < COLS; col++){
-					colorGrid[row][col].color = "rgba(250,90,90," + GRID_ALPHA*(count+1) + ")";
+					colorGrid[row][col].color = "rgba(242,156,79," + GRID_ALPHA*(count+1) + ")";
 					colorGrid[row][col].draw();
 				}
 			}
@@ -57,8 +57,10 @@ function drawAll(){
 
 /* Set up color grid */
 function transition() {
+    canvas = document.getElementById("myCanvas");
+    ctx = canvas.getContext("2d");
+    colorGrid = new Array(ROWS);
 
-    var colorGrid = new Array(ROWS);
     for (var i=0; i<colorGrid.length;i++){
         colorGrid[i] = new Array(COLS);
     }

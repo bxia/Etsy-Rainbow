@@ -66,10 +66,12 @@
     height: 70px;
     background: rgba(0,0,0,0.4);
     position: absolute;
-    top: 200px;
-    left: 300px;
+    top: 265px;
+    left: 365px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    z-index: 100;
+    display: none;
 }
 
 #loader{
