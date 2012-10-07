@@ -37,13 +37,13 @@ window.onload = function(){
         else {
             $("#type-all").attr("checked", false);
         }
-        run();
+        drawMap();
     });
     $("#type-all").change(function(){
         $("form.type input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        run();
+        drawMap();
     });
 
 
@@ -54,16 +54,16 @@ window.onload = function(){
         $("#price-slider").slideUp("fast");
         //$('form.price').animate({ marginTop: '20px'}, 200);
         $("form.price").css({"margin-bottom": "20px"});
-        run();
+        drawMap();
     });
     $("#price-range").change(function(){     // show slider if range is chosen, adjust margin
          $("#price-slider").slideDown("fast");
          $("form.price").css({"margin-bottom": "70px"});
-         run();
+         drawMap();
     });
 
     $(".jslider-pointer").click(function(){
-        run();
+        drawMap();
     });
 
 
@@ -77,13 +77,13 @@ window.onload = function(){
         else {
             $("#category-all").attr("checked", false);
         }
-        run();
+        drawMap();
     });
     $("#category-all").change(function(){
         $("form.categories input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        run();
+        drawMap();
     });
     needsLoading = 0;
 

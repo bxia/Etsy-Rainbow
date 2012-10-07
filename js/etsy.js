@@ -71,12 +71,17 @@ function sendRequest(request,callback) {
     $.ajax({
         url: etsyURL,
         dataType: 'jsonp',
+        timeout: 100000,
         success: function(data) {
             if (data.ok){
                 callback(data,request);
             }
             else
                 err(data);
+        },
+        error: function(jqXHR, exception){
+            needsLoading--;
+            console.log("ajax request timeout");
         }
         
     });
@@ -258,6 +263,12 @@ function isNumber(n) {
 *
 */
 function updateOneGrid(data,request){
+    if(data === undefined || request === undefined){
+        var style = "background-image:url('../img/no-results.jpg');";
+        grid.el.html("<div class='image' style="+ style + "></div>");
+        needsLoading--;
+        return;
+    }
     var grid = request.requestGRID;
     var filter = request.requestOBJ;
     cache(filter,data);
@@ -269,7 +280,8 @@ function updateOneGrid(data,request){
     
     var result = findMostPopular(data,filter);
     if(result === undefined){
-        grid.el.html("<div class='image' src='../img/no-results.jpg'></div>");
+        var style = "background-image:url('img/no-results.jpg');";
+        grid.el.html("<div class='image' style="+ style + "></div>");
     }
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";

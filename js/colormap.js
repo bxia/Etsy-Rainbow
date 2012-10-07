@@ -122,8 +122,10 @@ function drawMap() {
                      Math.floor(rgb[2]) + ")"
         $(this).css("background-color", rgbStr);
         $(this).addClass("gridBefore");
+        $(element).removeClass("gridAfter");
 
     });
+
     run();
 }
 
@@ -230,11 +232,7 @@ function zoom(dir, center) {
     // change lower right
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
-    $.each(grids, function(index, value) {
-        var element = $(this);
-        $(element).removeClass("gridAfter");
-        
-    });
+    
     $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
     transition(); 
     $("#loader-wrapper").css("display", "block"); 
