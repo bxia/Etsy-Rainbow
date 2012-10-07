@@ -10,7 +10,10 @@
     transition: transform 1s;
 }
 
-
+#myCanvas{
+    position: absolute;
+    top: 0px;
+}
 /*.rotated{
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);

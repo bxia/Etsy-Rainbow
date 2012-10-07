@@ -56,17 +56,19 @@ function drawAll(){
 
 
 /* Set up color grid */
+function transition() {
 
-var colorGrid = new Array(ROWS);
-for (var i=0; i<colorGrid.length;i++){
-	colorGrid[i] = new Array(COLS);
+    var colorGrid = new Array(ROWS);
+    for (var i=0; i<colorGrid.length;i++){
+        colorGrid[i] = new Array(COLS);
+    }
+
+    for( var row = 0; row < ROWS; row++){
+        for(var col = 0; col < COLS; col++){
+            var newGrid = new Grid(col*GRID_HEIGHT, row*GRID_WIDTH);
+            colorGrid[row][col] = newGrid;
+        }
+    }
+
+    fadeIn();
 }
-
-for( var row = 0; row < ROWS; row++){
-	for(var col = 0; col < COLS; col++){
-		var newGrid = new Grid(col*GRID_HEIGHT, row*GRID_WIDTH);
-		colorGrid[row][col] = newGrid;
-	}
-}
-
-fadeIn();
