@@ -13,7 +13,7 @@ var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
 var color_accuracy = 20;
-var searchLimit = 30;
+var searchLimit = 50;
 var resultCache = new Object();
 var storedImages = new Array();
 var clicked= false;
@@ -264,8 +264,8 @@ function isNumber(n) {
 */
 function updateOneGrid(data,request){
     if(data === undefined || request === undefined){
-        var style = "background-image:url('../img/no-results.jpg');";
-        grid.el.html("<div class='image' style="+ style + "></div>");
+        var style = "background-image:url('img/no-results.jpg');opacity:1;";
+        grid.el.html("<div class='image gridAfter' style="+ style + "></div>");
         needsLoading--;
         return;
     }
@@ -280,8 +280,8 @@ function updateOneGrid(data,request){
     
     var result = findMostPopular(data,filter);
     if(result === undefined){
-        var style = "background-image:url('img/no-results.jpg');";
-        grid.el.html("<div class='image' style="+ style + "></div>");
+        var style = "background-image:url('img/no-results.jpg');opacity:1;";
+        grid.el.html("<div class='image gridAfter' style="+ style + "></div>");
     }
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
