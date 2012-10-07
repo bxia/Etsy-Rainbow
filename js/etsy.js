@@ -13,7 +13,7 @@ var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
 var color_accuracy = 20;
-var searchLimit = 50;
+var searchLimit = 30;
 var resultCache = new Object();
 var storedImages = new Array();
 var clicked= false;
@@ -269,7 +269,7 @@ function updateOneGrid(data,request){
     
     var result = findMostPopular(data,filter);
     if(result === undefined){
-        grid.el.html("<div class='image'></div>");
+        grid.el.html("<div class='image' src='../img/no-results.jpg'></div>");
     }
     else{
         var style = "background-image:url('"+ result.Images[0].url_75x75+"');";
