@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////
+//                        15237 HW4 Unit Project                      //
+// Group members: Zi Wang (ziw), Bingying Xia(bxia), Ruoyu Li(ruoyul) //
+////////////////////////////////////////////////////////////////////////
+
+
 window.onload = function(){
 
     // send search query
@@ -7,7 +13,7 @@ window.onload = function(){
         // check if search is empty
         if(keyword !== undefined
             && keyword.trim().length >0){
-            update();
+            //update();
         }
     })
 
@@ -21,13 +27,13 @@ window.onload = function(){
         else {
             $("#type-all").attr("checked", false);
         }
-        update();
+        //update();
     });
     $("#type-all").change(function(){
         $("form.type input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        update();
+        //update();
     });
 
 
@@ -38,16 +44,16 @@ window.onload = function(){
         $("#price-slider").slideUp("fast");
         //$('form.price').animate({ marginTop: '20px'}, 200);
         $("form.price").css({"margin-bottom": "20px"});
-        update();
+        //update();
     });
     $("#price-range").change(function(){     // show slider if range is chosen, adjust margin
          $("#price-slider").slideDown("fast");
          $("form.price").css({"margin-bottom": "70px"});
-         update();
+         //update();
     });
 
     $(".jslider-pointer").click(function(){
-        update();
+        //update();
     });
 
 
@@ -61,16 +67,17 @@ window.onload = function(){
         else {
             $("#category-all").attr("checked", false);
         }
-        update();
+        //update();
     });
     $("#category-all").change(function(){
         $("form.categories input.checkbox").each(function(){ // uncheck all checkboxes if "all" is selected
             $(this).attr("checked", false);
         })
-        update();
+        //update();
     });
 
 }
+
 
 
 function update(grid){
@@ -113,10 +120,24 @@ function update(grid){
 
 function disableAll(){
     $("input").attr("disabled", "disabled");
+    $("#pan-up").attr("class", "disabled");
+    $("#pan-down").attr("class", "disabled");
+    $("#pan-left").attr("class", "disabled");
+    $("#pan-right").attr("class", "disabled");
+    $("#pan-center").attr("class", "disabled");
+    $("#zoom-in").attr("class", "disabled");
+    $("#zoom-out").attr("class", "disabled");
 }
 
 function enableAll(){
     $("input").removeAttr("disabled");
+    $("#pan-up").attr("class", "enabled");
+    $("#pan-down").attr("class", "enabled");
+    $("#pan-left").attr("class", "enabled");
+    $("#pan-right").attr("class", "enabled");
+    $("#pan-center").attr("class", "enabled");
+    $("#zoom-in").attr("class", "enabled");
+    $("#zoom-out").attr("class", "enabled");
 }
 
 
