@@ -175,6 +175,18 @@ function zoom(dir, center) {
         yZoomDeltaUp *= -1;
         yZoomDeltaDown *= -1;
         zoomLevel -= 1;
+        if (zoomLevel === 0) {
+            $("#zoom-out").attr("class", "disabled");
+        }
+        if (zoomLevel <= 1) {
+            $("#pan-up").attr("class", "disabled");
+            $("#pan-down").attr("class", "disabled");
+            $("#pan-left").attr("class", "disabled");
+            $("#pan-right").attr("class", "disabled");
+        }
+        if (zoomLevel < 5) {
+            $("#zoom-in").attr("class", "enabled");
+        }
         lastCenter = undefined;
     } else if (dir === "in") {
         if (zoomLevel === 5) {
@@ -182,6 +194,18 @@ function zoom(dir, center) {
             return;
         }
         zoomLevel += 1;
+        if (zoomLevel === 5) {
+            $("#zoom-in").attr("class", "disabled");
+        }
+        if (zoomLevel >= 1) {
+            $("#zoom-out").attr("class", "enabled");
+        }
+        if (zoomLevel > 1) {
+            $("#pan-up").attr("class", "enabled");
+            $("#pan-down").attr("class", "enabled");
+            $("#pan-left").attr("class", "enabled");
+            $("#pan-right").attr("class", "enabled");
+        }
         lastCenter = center;
         debugLog("zooming in to: " + lastCenter);
         debugLog("zoomLevel after zoom in: " + zoomLevel);
@@ -199,17 +223,17 @@ function zoom(dir, center) {
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
 
-    $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
-    transition(); 
-    $("#loader-wrapper").css("display", "block"); 
+    // $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
+    // transition(); 
+    // $("#loader-wrapper").css("display", "block"); 
 
-    setTimeout(function() {
-        $("#myCanvas").fadeOut("slow");
-    }, 1000);
+    // setTimeout(function() {
+    //     $("#myCanvas").fadeOut("slow");
+    // }, 1000);
 
-    setTimeout(function() {
-        $("#myCanvas").remove();
-    }, 1500);
+    // setTimeout(function() {
+    //     $("#myCanvas").remove();
+    // }, 1500);
 
     drawMap();
 }
@@ -218,6 +242,12 @@ function reset() {
     frame[0] = $.extend(true, [], startFrame[0]);
     frame[1] = $.extend(true, [], startFrame[1]);
     frame[2] = $.extend(true, [], startFrame[2]);
+    zoomLevel = 0;
+    $("#pan-up").attr("class", "disabled");
+    $("#pan-down").attr("class", "disabled");
+    $("#pan-left").attr("class", "disabled");
+    $("#pan-right").attr("class", "disabled");
+    $("#zoom-out").attr("class", "disabled");
     debugLog("redrawing map from start");
     drawMap();
 }
@@ -239,6 +269,12 @@ function move(dir) {
             debugLog("moving up by: " + yDelta);
             frame[i][2] += yDelta;
         }
+        if (frame[0][2] >= startFrame[0][2]) {
+            $("#pan-up").attr("class", "disabled");
+        }
+        if (frame[2][2] >= startFrame[2][2] + yDelta) {
+            $("#pan-down").attr("class", "enabled");
+        }
     } else if (dir === "down") {
         if (frame[2][2] <= startFrame[2][2]) {
             debugLog("reached bottom, cannot move down");
@@ -246,6 +282,12 @@ function move(dir) {
         }
         for (var i=0; i<frame.length; i++) {
             frame[i][2] -= yDelta;
+        }
+        if (frame[2][2] <= startFrame[2][2]) {
+            $("#pan-down").attr("class", "disabled");
+        }
+        if (frame[0][2] <= startFrame[0][2] + yDelta) {
+            $("#pan-up").attr("class", "enabled");
         }
     } else if (dir === "left") {
         if (frame[0][0] >= startFrame[0][0]) {
@@ -255,6 +297,12 @@ function move(dir) {
         for (var i=0; i<frame.length; i++) {
             frame[i][0] += xDelta;
         }
+        if (frame[0][0] >= startFrame[0][0]) {
+            $("#pan-left").attr("class", "disabled");
+        }
+        if (frame[1][0] >= startFrame[1][0] + xDelta) {
+            $("#pan-right").attr("class", "enabled");
+        }
     } else {
         if (frame[1][0] <= startFrame[1][0]) {
             debugLog("reached end, cannot move right");
@@ -263,12 +311,20 @@ function move(dir) {
         for (var i=0; i<frame.length; i++) {
             frame[i][0] -= xDelta;
         }
+        if (frame[1][0] <= startFrame[1][0]) {
+            $("#pan-right").attr("class", "disabled");
+        }
+        if (frame[0][0] <= startFrame[0][0] + xDelta) {
+            $("#pan-left").attr("class", "enabled");
+        }
     }
 
     drawMap();
 }
 
 function start() {
+
+    $("#pan-center").attr("class", "enabled");
 
     reset();
 
@@ -289,21 +345,6 @@ function start() {
     resetButton.onclick = function() {
         reset();
     }
-
-    // $(document).ready(function() {
-    //     $(window).scroll(function() {
-    //         alert($(window).scrollTop());
-    //     });
-    // });
-
-    // $(document).ready(function() {
-    //     $(".grid").smoothDivScroll(function(event) {
-    //         alert("BBBBBB");
-    //         debugLog($(this).attr("id"));
-    //         zoom("in", $(this).attr("id"));
-    //         event.preventDefault();
-    //     });
-    // });
 
     var upButton = document.getElementById("pan-up");
     upButton.onclick = function() {
