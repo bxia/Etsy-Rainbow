@@ -124,10 +124,18 @@ function drawMap() {
         $(this).addClass("gridBefore");
 
     });
+    run();
 }
 
 
 function zoom(dir, center) {
+    if(needsLoading!==0){
+        $('#wait-message').css('display','block');
+                setTimeout(function  () {
+            $('#wait-message').css('display','none');
+        },5000);
+        return;
+    } //wait for current request 
     var xDelta = (startFrame[0][0] - startFrame[1][0])/(COL-1);
     var yDelta = (startFrame[0][2] - startFrame[2][2])/(ROW-1);
     var xZoomDeltaLeft = xDelta / 2;
@@ -222,7 +230,11 @@ function zoom(dir, center) {
     // change lower right
     frame[3][0] = frame[3][0] + xZoomDeltaRight;
     frame[3][2] = frame[3][2] + yZoomDeltaDown;
-
+    $.each(grids, function(index, value) {
+        var element = $(this);
+        $(element).removeClass("gridAfter");
+        
+    });
     $("#products").append("<canvas id='myCanvas' width='800' height='600'></canvas>");
     transition(); 
     $("#loader-wrapper").css("display", "block"); 
@@ -240,6 +252,13 @@ function zoom(dir, center) {
 }
 
 function reset() {
+    if(needsLoading!==0){
+        $('#wait-message').css('display','block');
+                setTimeout(function  () {
+            $('#wait-message').css('display','none');
+        },5000);
+        return;
+    } //wait for current request 
     frame[0] = $.extend(true, [], startFrame[0]);
     frame[1] = $.extend(true, [], startFrame[1]);
     frame[2] = $.extend(true, [], startFrame[2]);
@@ -254,6 +273,13 @@ function reset() {
 }
 
 function move(dir) {
+    if(needsLoading!==0){
+        $('#wait-message').css('display','block');
+                setTimeout(function  () {
+            $('#wait-message').css('display','none');
+        },5000);
+        return;
+    } //wait for current request 
     if (zoomLevel <= 1) {
         debugLog("at top 2 level, cannot move");
         return;
@@ -368,4 +394,4 @@ function start() {
     }
 }
 
-start();
+

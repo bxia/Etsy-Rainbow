@@ -37,12 +37,12 @@
 		<div class="row">
 			<div id="filters" class="span3">
 
-				<form class="search" id="search">
+			<!-- 	<form class="search" id="search">
 				  <div class="input-append">
 				    <input type="text" class="span2" id="keyword" placeholder="Search by keyword...">
 				    <button type="submit" class="btn"></button>
 				  </div>
-				</form>
+				</form> -->
 
 				<form class="type">
 					<div class="form-label">Type</div>
@@ -375,31 +375,33 @@
 				    </div>
 				</div>
              <div id="loader-wrapper">
-            <div id="loader">
-                <div id="circularG_1" class="circularG">
-                </div>
-                <div id="circularG_2" class="circularG">
-                </div>
-                <div id="circularG_3" class="circularG">
-                </div>
-                <div id="circularG_4" class="circularG">
-                </div>
-                <div id="circularG_5" class="circularG">
-                </div>
-                <div id="circularG_6" class="circularG">
-                </div>
-                <div id="circularG_7" class="circularG">
-                </div>
-                <div id="circularG_8" class="circularG">
-                </div>
-            </div>
-        </div>
+	            <div id="loader">
+	                <div id="circularG_1" class="circularG">
+	                </div>
+	                <div id="circularG_2" class="circularG">
+	                </div>
+	                <div id="circularG_3" class="circularG">
+	                </div>
+	                <div id="circularG_4" class="circularG">
+	                </div>
+	                <div id="circularG_5" class="circularG">
+	                </div>
+	                <div id="circularG_6" class="circularG">
+	                </div>
+	                <div id="circularG_7" class="circularG">
+	                </div>
+	                <div id="circularG_8" class="circularG">
+	                </div>
+	            </div>
+	        </div>
+	         <div id="wait-message">
+            Please be patient and don't click on stuff while loading.
+	        </div>
 
 			</div>
 			<div id="controls" class="span1">
 				
-				<button onclick="run();">Run</button>
-				
+			
 				<div id="pan">
 					<span id="pan-up" class="disabled"></span>
 					<div id="pan-row2">
@@ -423,17 +425,6 @@
 	</div>
 
 
-		 <script type="application/javascript">
-			function flip(){
-				console.log("flip");
-			    if(document.getElementsByClassName("grid")[1].className == "grid block"){
-			        document.getElementsByClassName("grid")[1].className += " rotated";
-			    }
-			    else{
-			        document.getElementsByClassName("grid")[1].className = "grid block";
-			    }
-			}
-		</script>
 
 
 		<script src="js/form.js"></script>

@@ -13,7 +13,7 @@ var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
 var color_accuracy = 20;
-var searchLimit = 30;
+var searchLimit = 50;
 var resultCache = new Object();
 var storedImages = new Array();
 var clicked= false;
@@ -171,10 +171,15 @@ function findMostPopular (data,filter) {
         var when_made = o.when_made;
         var who_made = o.who_made;
         var num_favorers = o.num_favorers;
-        var category = o.category_path[0];
+        var category= (o.category_path===undefined)? undefined : o.category_path[0];
         var price = o.price;
         var type = filter.filterType;
         var cat  = filter.category;
+
+
+        if(category !== undefined) category =  category.toLowerCase();
+        if(type !== undefined) type = type.toLowerCase();
+        
         if(
             //image can't be duplicate
             storedImages.indexOf(o.Images[0].url_75x75) === -1
@@ -213,8 +218,12 @@ function findMostPopular (data,filter) {
             result = o;
         } 
     }
-    storedImages.push(result.Images[0].url_75x75);
+    if(result !== undefined && result.Images!== undefined && result.Images[0]!==undefined)
+        storedImages.push(result.Images[0].url_75x75);
+
+
     return result;
+
 }
 
 
@@ -302,16 +311,28 @@ function updateOneGrid(data,request){
     needsLoading--;
     if(needsLoading===0){
         console.log("request all done");
+        enableAll();
+        $('#loader-wrapper').fadeOut('slow');
+        $('#wait-message').fadeOut('slow');
     }
 }   
 
 function run () {
-
+    //      alert('1');
+    if(needsLoading!==0){
+        $('#wait-message').css('display','block');
+        setTimeout(function  () {
+            $('#wait-message').css('display','none');
+        },3000);
+        return;
+    } //wait for current request 
+     $('#loader-wrapper').fadeIn('slow');
     var allGrids = new Array();
     needsLoading = 48;
     storedImages = new Array();
 
     console.log("request initiated");
+    disableAll();
     $.each(grids, function(index, value) {
         // get hsl value of this grid
         var gridId = value.id;
@@ -346,11 +367,15 @@ function run () {
             var grid = allGrids[i1];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,0),updateOneGrid);
             }
             else{
+                console.log(filter);
+                console.log(readFromCache(filter));
+                console.log("read from cache");
                 updateOneGrid(readFromCache(filter),prepareURL(filter,grid,0));
             }
             
@@ -367,7 +392,8 @@ function run () {
             var grid = allGrids[i2];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,1),updateOneGrid);
             }
@@ -387,7 +413,8 @@ function run () {
             var grid = allGrids[i3];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,2),updateOneGrid);
             }
@@ -407,7 +434,8 @@ function run () {
             var grid = allGrids[i4];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,3),updateOneGrid);
             }
@@ -427,7 +455,8 @@ function run () {
             var grid = allGrids[i5];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,4),updateOneGrid);
             }
@@ -446,7 +475,8 @@ function run () {
             var grid = allGrids[i6];
             var filter = new Filter();
             filter.color = grid.color;
-            filter.keyword=  "book";
+            update(filter);
+
             if(readFromCache(filter) === undefined){
                 sendRequest(prepareURL(filter,grid,5),updateOneGrid);
             }
@@ -457,6 +487,40 @@ function run () {
         }
     },205);    
 
+}
+
+
+function update(filter){
+    // update search keyword
+    //filter.keyword = document.getElementById('keyword').value;
+
+    // update type
+    if ($("#type-all").attr("checked") === "checked"){
+        filter.filterType = "all";
+    }
+    else {
+        $("form.type input.checkbox:checked").each(function(){
+            filter.filterType += $(this).attr("value");
+        });
+    }
+
+    // update price range
+    if ($("#price-range").attr("checked") === "checked"){
+        var priceRange = $("#price").attr("value");
+        var delimLoc = priceRange.indexOf(";");
+        filter.minPrice = priceRange.substring(0,delimLoc);
+        filter.maxPrice = priceRange.substring(delimLoc+1,priceRange.length);
+    }
+
+    // update categories
+    if ($("#category-all").attr("checked") === "checked"){
+        filter.category = "all";
+    }
+    else {
+        $("form.categories input.checkbox:checked").each(function(){
+            filter.category += $(this).attr("value");
+        });
+    }
 }
 
 function println (data) {
