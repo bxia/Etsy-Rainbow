@@ -80,6 +80,66 @@ window.onload = function(){
 
 
 
+function update(grid){
+    var filter = new Filter();
+
+    // update search keyword
+    filter.keyword = document.getElementById('keyword').value;
+
+    // update type
+    if ($("#type-all").attr("checked") === "checked"){
+        filter.filterType = "all";
+    }
+    else {
+        $("form.type input.checkbox:checked").each(function(){
+            filter.filterType += $(this).attr("value");
+        });
+    }
+
+    // update price range
+    if ($("#price-range").attr("checked") === "checked"){
+        var priceRange = $("#price").attr("value");
+        var delimLoc = priceRange.indexOf(";");
+        filter.minPrice = priceRange.substring(0,delimLoc);
+        filter.maxPrice = priceRange.substring(delimLoc+1,priceRange.length);
+    }
+
+    // update categories
+    if ($("#category-all").attr("checked") === "checked"){
+        filter.category = "all";
+    }
+    else {
+        $("form.categories input.checkbox:checked").each(function(){
+            filter.category += $(this).attr("value");
+        });
+    }
+
+    console.log(filter);
+   
+}
+
+function disableAll(){
+    $("input").attr("disabled", "disabled");
+    $("#pan-up").attr("class", "disabled");
+    $("#pan-down").attr("class", "disabled");
+    $("#pan-left").attr("class", "disabled");
+    $("#pan-right").attr("class", "disabled");
+    $("#pan-center").attr("class", "disabled");
+    $("#zoom-in").attr("class", "disabled");
+    $("#zoom-out").attr("class", "disabled");
+}
+
+function enableAll(){
+    $("input").removeAttr("disabled");
+    $("#pan-up").attr("class", "enabled");
+    $("#pan-down").attr("class", "enabled");
+    $("#pan-left").attr("class", "enabled");
+    $("#pan-right").attr("class", "enabled");
+    $("#pan-center").attr("class", "enabled");
+    $("#zoom-in").attr("class", "enabled");
+    $("#zoom-out").attr("class", "enabled");
+}
+
 
 
 

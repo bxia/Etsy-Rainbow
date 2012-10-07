@@ -455,22 +455,7 @@ function run () {
             }
             i6++;
         }
-    },205);
-
-    // $(document).click(function(e) {
-    // if(clicked){ 
-    //     clicked=false;
-    //     return;
-    // }
-    // var l = ($('.popup-marker'));
-    // for(var i=0;i<l.length;i++){
-    //    ($(l[i]).popover('hide'));  
-    // }
-    // clicked = false;
-
-    // });
-
-    
+    },205);    
 
 }
 
