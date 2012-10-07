@@ -1,0 +1,21 @@
+Etsy API KEY
+
+Wang Zi:
+    APP NAME15237 unit project
+    KEYSTRING 22u5zgz7eze80ymvmqshkdti
+    KEY2    tmo7w4tcorpv50ccnt2nj4n5
+    KEY3 xt4c9qkyu9hmt139xrsqiyja
+    SHARED SECRETnvs5ykvwa7
+
+
+Ruoyu Li:
+    Rainbow
+    KEYSTRING2ufyxjd5wccvgcm0yb61jp7b
+    SHARED SECRETui4uutk6y7
+
+Bingying Xia:
+KEYSTRING   hr7dbzisuo6y56soguanj071
+SHARED SECRET   uags51xnu6
+
+KEYSTRING l7yd3rcwklc1g3gnl89z4qru
+SHARED SECRETa4tf0wr7wk

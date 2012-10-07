@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Etsy Rainbow</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+
+	<!-- bin/jquery.slider.min.css -->
+	<link rel="stylesheet" href="css/jslider.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.blue.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.plastic.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.round.css" type="text/css">
+	<link rel="stylesheet" href="css/jslider.round.plastic.css" type="text/css">
+	<!-- end -->
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	
+	<!-- bin/jquery.slider.min.js -->
+	<script type="text/javascript" src="js/jshashtable-2.1_src.js"></script>
+	<script type="text/javascript" src="js/jquery.numberformatter-1.2.3.js"></script>
+	<script type="text/javascript" src="js/tmpl.js"></script>
+	<script type="text/javascript" src="js/jquery.dependClass-0.1.js"></script>
+	<script type="text/javascript" src="js/draggable-0.1.js"></script>
+	<script type="text/javascript" src="js/jquery.slider.js"></script>
+	<!-- end -->
+
+	<script src="js/form.js"></script>
+	<script src="js/etsy.js"></script>
+
+</head>
+<body>
+	<div id="header" class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<a class="brand" href="#">Etsy Rainbow</a>
+		</div>
+	</div>
+	<div id="container" class="container">
+		<div class="row">
+			<div id="filters" class="span3">
+
+				<form class="search" id="search">
+				  <div class="input-append">
+				    <input type="text" class="span2" id="keyword" placeholder="Search by keyword...">
+				    <button type="submit" class="btn"></button>
+				  </div>
+				</form>
+
+				<form class="type">
+					<div class="form-label">Type</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="type" id="type-all" value="all" checked>
+						All
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="handmade" class="checkbox">
+						Handmade
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="vintage" class="checkbox">
+						Vintage
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="supplies" class="checkbox">
+						Supplies
+					</label>
+				</form>
+
+				<form class="price">
+					<div class="form-label">Price</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="price" id="price-all" value="all" checked>
+						All
+					</label>
+					<label class="radio2">
+						<input type="radio" class="radio" name="price" id="price-range" value="all">Range
+					</label>
+					   <div class="layout-slider" id="price-slider">
+					      <input id="price" type="slider" name="area" value="10;100" />
+					    </div>
+					    <script type="text/javascript" charset="utf-8">
+					      jQuery("#price").slider({ from: 0, to: 300, heterogeneity: ['50/100', '75/250'], scale: [0, '|', 100, '|', '200', '|', 300], limits: false, step: 1, dimension: '$', skin: "round_plastic" });
+					    </script>
+				</form>
+
+
+				<form class="categories">
+					<div class="form-label">Categories</div>
+					<label class="radio">
+						<input type="radio" class="radio" name="category" id="category-all" value="all" checked>
+						All
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="accessories" class="checkbox">
+						Accessories
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="art" class="checkbox">
+						Art
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="bags_and_purses" class="checkbox">
+						Bags and Purses
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="bath_and_beauty" class="checkbox">
+						Bath and Beauty
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="books_and_zines" class="checkbox">
+						Books and Zines
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="candles" class="checkbox">
+						Candles
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="ceramics_and_pottery" class="checkbox">
+						Ceramics and Pottery
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="children" class="checkbox">
+						Children
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="clothing" class="checkbox">
+						Clothing
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="crochet" class="checkbox">
+						Crochet
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="dolls_and_miniatures" class="checkbox">
+						Dolls and Miniatures
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="everything_else" class="checkbox">
+						Everything Else
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="furniture" class="checkbox">
+						Furniture
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="geekery" class="checkbox">
+						Geekery
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="glass" class="checkbox">
+						Glass
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="holidays" class="checkbox">
+						Holidays
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="housewares" class="checkbox">
+						Housewares
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="jewelry" class="checkbox">
+						Jewelry
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="knitting" class="checkbox">
+						Knitting
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="music" class="checkbox">
+						Music
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="needlecraft" class="checkbox">
+						Needlecraft
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="paper_goods" class="checkbox">
+						Paper Goods
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="patterns" class="checkbox">
+						Patterns
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="pets" class="checkbox">
+						Pets
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="plants_and_edibles" class="checkbox">
+						Plants and Edibles
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="quilts" class="checkbox">
+						Quilts
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="supplies" class="checkbox">
+						Supplies
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="toys" class="checkbox">
+						Toys
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="vintage" class="checkbox">
+						Vintage
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="weddings" class="checkbox">
+						Weddings
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" value="woodworking" class="checkbox">
+						Woodworking
+					</label>
+				</form>
+
+			</div>
+
+			<div id="products" class="span8">
+			</div>
+			<div id="controls" class="span1">
+				<div id="pan">
+					<span id="pan-up" class="disabled"></span>
+					<div id="pan-row2">
+						<span id="pan-left" class="disabled"></span>
+						<span id="pan-center" class="disabled"></span>
+						<span id="pan-right" class="disabled"></span>
+					</div>
+					<span id="pan-down" class="disabled"></span>
+				</div>
+				<div id="zoom">
+					<div id="zoom-in"></div>
+					<div id="zoom-lvl" class="zoom-lvl-1"></div>
+					<div id="zoom-out" class="disabled"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

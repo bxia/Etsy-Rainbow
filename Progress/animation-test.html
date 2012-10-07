@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Animation Tests</title>
+<link rel="stylesheet" type="text/css" href="css/animation.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="application/javascript">
+	function flip(){
+	    if(document.getElementById("block").className == "block"){
+	        document.getElementById("block").className += " rotated";
+	    }
+	    else{
+	        document.getElementById("block").className = "block";
+	    }
+	}
+</script>
+
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="block" class="block" onclick="flip()">
+            <div class="front side">
+            	blah blah
+            </div>
+            <div class="back side"></div>
+        </div>
+        <div id="animation">
+            <canvas id="myCanvas" width="510" height="510"></canvas>
+        </div>
+    </div>
+
+    <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
+        <button class="btn">Toggle Popover</button>
+    </a>
+
+      <a href="#" rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="close">
+        <button class="btn">close</button>
+    </a>
+    <script>
+        $(function ()  
+            { $("#open").popover(); 
+            	$("#close").popover('destroy'); 
+        }); 
+    </script>
+
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>

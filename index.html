@@ -1,11 +1,14 @@
 <!DOCTYPE HTML>
+<!-- Zi Wang(ziw), Bingying Xia(bxia), Ruoyu Li(ruoyul)   -->
+<!-- 15237 HW4 Unit Project -->
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
 	<title>Etsy Rainbow</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="all">
-
+	 <link href="css/colormap.css" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" type="text/css" href="css/animation.css" media="all">
 	<!-- bin/jquery.slider.min.css -->
 	<link rel="stylesheet" href="css/jslider.css" type="text/css">
 	<link rel="stylesheet" href="css/jslider.blue.css" type="text/css">
@@ -25,9 +28,6 @@
 	<script type="text/javascript" src="js/jquery.slider.js"></script>
 	<!-- end -->
 
-	<script src="js/form.js"></script>
-	<script src="js/etsy.js"></script>
-
 </head>
 <body>
 	<div id="header" class="navbar navbar-static-top">
@@ -39,12 +39,12 @@
 		<div class="row">
 			<div id="filters" class="span3">
 
-				<form class="search" id="search">
+			<!-- 	<form class="search" id="search">
 				  <div class="input-append">
 				    <input type="text" class="span2" id="keyword" placeholder="Search by keyword...">
 				    <button type="submit" class="btn"></button>
 				  </div>
-				</form>
+				</form> -->
 
 				<form class="type">
 					<div class="form-label">Type</div>
@@ -215,12 +215,195 @@
 						Woodworking
 					</label>
 				</form>
-
 			</div>
 
 			<div id="products" class="span8">
+				<div id="grid_map">
+				    <div id="row0" class="color-row">
+				        <div id="00" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="01" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="02" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="03" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="04" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="05" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="06" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="07" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				    <div id="row1" class="color-row">
+				        <div id="10" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="11" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="12" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="13" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="14" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="15" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="16" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="17" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				    <div id="row2" class="color-row">
+				        <div id="20" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="21" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="22" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="23" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="24" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="25" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="26" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="27" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				    <div id="row3" class="color-row">
+				        <div id="30" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="31" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="32" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="33" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="34" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="35" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="36" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="37" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				    <div id="row4" class="color-row">
+				        <div id="40" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="41" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="42" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="43" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="44" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="45" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="46" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="47" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				    <div id="row5" class="color-row">
+				        <div id="50" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="51" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="52" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="53" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="54" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="55" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="56" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				        <div id="57" class="grid">
+				        	<div class='image'></div>
+				        </div>
+				    </div>
+				</div>
+             <div id="loader-wrapper">
+	            <div id="loader">
+	                <div id="circularG_1" class="circularG">
+	                </div>
+	                <div id="circularG_2" class="circularG">
+	                </div>
+	                <div id="circularG_3" class="circularG">
+	                </div>
+	                <div id="circularG_4" class="circularG">
+	                </div>
+	                <div id="circularG_5" class="circularG">
+	                </div>
+	                <div id="circularG_6" class="circularG">
+	                </div>
+	                <div id="circularG_7" class="circularG">
+	                </div>
+	                <div id="circularG_8" class="circularG">
+	                </div>
+	            </div>
+	        </div>
+	         <div id="wait-message">
+            Please be patient and don't click on stuff while loading.
+	        </div>
+
 			</div>
 			<div id="controls" class="span1">
+				
+			
 				<div id="pan">
 					<span id="pan-up" class="disabled"></span>
 					<div id="pan-row2">
@@ -235,7 +418,21 @@
 					<div id="zoom-lvl" class="zoom-lvl-1"></div>
 					<div id="zoom-out" class="disabled"></div>
 				</div>
+				<a  rel="popover" data-content="blah blah blah" data-original-title="TITLE" id="open">
+      
+    </a>
+
 			</div>
 		</div>
 	</div>
+
+
+
+
+		<script src="js/form.js"></script>
+	<script src="js/etsy.js"></script>
+	<script src="js/canvas.js"></script>
+	<script type="text/javascript" src="js/colormap.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+
 </body>

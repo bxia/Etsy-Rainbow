@@ -9,6 +9,11 @@ var _KEY6_ = "&api_key=xt4c9qkyu9hmt139xrsqiyja";
 var _KEY_ARRAY_ = [_KEY1_,_KEY2_,_KEY3_,_KEY4_,_KEY5_,_KEY6_];
 var OK = 1;
 var ERR = -1;
+////////////////////////////////////////////////////////////////////////
+//                        15237 HW4 Unit Project                      //
+// Group members: Zi Wang (ziw), Bingying Xia(bxia), Ruoyu Li(ruoyul) //
+////////////////////////////////////////////////////////////////////////
+
 var INVALID_URL = "Invalid etsy url. Can't proceed to ajax request";
 var SUCC_MSG = "Ajax request succeeded";
 var FAIL_MSG = "Ajax request failed";
@@ -71,7 +76,7 @@ function sendRequest(request,callback) {
     $.ajax({
         url: etsyURL,
         dataType: 'jsonp',
-        timeout: 100000,
+        timeout: 60000,
         success: function(data) {
             if (data.ok){
                 callback(data,request);
