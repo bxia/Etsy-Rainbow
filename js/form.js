@@ -49,7 +49,7 @@ window.onload = function(){
 
     // handle price slider toggling
 
-    $("#price-slider").hide();              // hide slider at first
+    // $("#price-slider").hide();              // hide slider at first
     $("#price-all").change(function(){       // hide slider if all is chosen, adjust margin
         $("#price-slider").slideUp("fast");
         //$('form.price').animate({ marginTop: '20px'}, 200);
